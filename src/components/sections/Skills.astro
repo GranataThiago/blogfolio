@@ -15,9 +15,10 @@
     i{
         color: var(--clr-text-card);
         font-size: var(--fs-xl);
-        background-color: var(--clr-detail-secondary);
+        border: 2px solid var(--clr-detail-secondary);
         padding: .5em;
         border-radius: 50%;
+        transition: .2s all ease-in;
     }
 
     .skills-extra{
@@ -33,8 +34,8 @@
     }
 
     i:hover{
-        padding: .7em;
-        transition: .2s all ease-in-out;
+        border-color: var(--clr-secondary);
+        background-color: var(--clr-detail-secondary);
     }
 
 </style>
