@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+
+import Posts from '../components/Posts.astro'
+const url = Astro.site.href;
+---
+
+<BaseLayout title="Blog" description="" url={url}>
+  <Posts/>
+</BaseLayout>

@@ -1,0 +1,9 @@
+body {
+	background-repeat: no-repeat;
+}
+
+main {
+	margin: 0 auto;
+	max-width: 1024px;
+	padding: 0em 4em;
+}

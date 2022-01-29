@@ -1,0 +1,20 @@
+---
+// src/layouts/PostLayout.astro
+import BaseLayout from './BaseLayout.astro'
+
+const { content } = Astro.props;
+const url = Astro.site.href;
+---
+
+  <style>
+    article{
+      font-weight: 300;
+    }
+
+  </style>
+<BaseLayout title={content.title} description={content.description} url={url}>
+    <h1>{content.title}</h1>
+    <article>
+      <slot />
+    </article>
+</BaseLayout>

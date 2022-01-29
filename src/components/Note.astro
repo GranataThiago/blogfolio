@@ -1,0 +1,42 @@
+---
+    const { title, description, redirect } = Astro.props;
+---
+
+<style>
+		.note{
+			flex: 0 0 auto;
+			width: 250px;
+			height: 150px;
+			padding: 1em;
+			border-radius: 20px;
+			color: white;
+			background-color: #101216;
+
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+		}
+
+        .title{
+            place-self: start;
+            font-size: var(--fs-sm);
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+
+        .title a{
+            color: var(--clr-text-card);
+            text-decoration: none;
+        }
+
+        .description{
+            font-size: var(--fs-sm);
+            font-weight: 300;
+        }
+
+</style>
+
+<article class="note">
+    <p class="title"> <a href={redirect} target={(redirect) && '_blank'}>{title}</a></p>
+    <p class="description">{description}</p>
+</article>

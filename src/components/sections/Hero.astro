@@ -1,0 +1,120 @@
+---
+
+import Note from '../Note.astro'
+
+const lastPost = Astro.fetchContent('../../pages/posts/*.md').sort((a, b) => {
+    return (new Date(b.date).getTime() - new Date(a.date).getTime());
+}).pop();
+
+---
+    <style>
+		.last-post{
+            display: flex;
+            justify-content: space-around;
+            flex-flow: row wrap;
+            align-items: center;
+
+            box-sizing: border-box;
+			max-width: 1024px;
+			height: 330px;
+			padding: 2em;
+			border-radius: 20px;
+			color: white;
+            background-image: linear-gradient(
+                45deg,
+                hsl(252deg 95% 17%) 13%,
+                hsl(214deg 100% 25%) 37%,
+                hsl(200deg 100% 26%) 52%,
+                hsl(181deg 100% 24%) 62%,
+                hsl(174deg 100% 29%) 71%,
+                hsl(187deg 100% 36%) 77%,
+                hsl(201deg 71% 61%) 83%,
+                hsl(225deg 86% 81%) 88%,
+                hsl(250deg 43% 72%) 92%,
+                hsl(265deg 22% 53%) 95%,
+                hsl(280deg 27% 34%) 98%,
+                hsl(296deg 47% 17%) 100%
+            );
+            box-shadow: var(--strong-shadow);
+		}
+
+        .title-mobile{
+            display: none;
+        }
+
+        .title{
+            font-size: var(--fs-xl);
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .subtitle{
+            font-size: var(--fs-md);
+            margin: 0;
+        }
+
+        .last-post article{
+            width: 450px;
+            height: 220px;
+
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            text-align: center;
+
+            background-image: linear-gradient(180deg, hsl(0deg, 0%, 17%) 0%, hsl(0deg, 0%, 0%) 100%);
+            box-shadow: var(--strong-shadow);
+            border-radius: 20px;
+        }
+
+        .last-post a{
+            text-decoration: none;
+            color: var(--clr-text-cards);
+        }
+
+		.note-container{
+			margin-top: 1em;
+			gap: 1.3em;
+			display: flex;
+			overflow-x: auto;
+		}
+
+        @media (max-width: 1060px){
+            .title, .subtitle{
+                display: none;
+            }
+            .title-mobile{
+                display: inline-block;
+                font-size: var(--fs-xl);
+                margin:  0;
+            }
+            .last-post article{
+                width: 100%;
+            }
+        }
+
+	</style>
+
+<main>
+
+        <div class="last-post"> 
+            <div class="last-post__info">
+                <h2 class="title-mobile">Mi último articulo</h2>
+                <h2 class="title">Hola, acá Thiago!</h2>
+                <p class="subtitle">Mirá mi último articulo →</p>
+            </div>
+            <a href={lastPost.url}>
+                <article>
+                    <h3>{lastPost.title}</h3>
+                </article>
+            </a>
+        </div>
+
+		<div class="note-container">
+
+			<Note title="Gradient Generator 🚀"  description="En esta página vas a poder crear degradados muy lindos y muy rápido" redirect="https://www.joshwcomeau.com/gradient-generator/"/>
+            <Note title="Flexbox Gap"  description="Sabias que podes utilizar la propiedad gap para separar tus elementos flexbox?" redirect=""/>
+
+		</div>
+
+</main>

@@ -1,0 +1,59 @@
+---
+import SinglePost from '../SingleProject.astro';
+
+const projects = [
+    {
+        name: 'restserver',
+        linkTo: 'https://github.com/GranataThiago/restserver',
+        description: 'Estructura básica de un rest server con autenticación incluida.',
+        techs: 'Node, Express, Mongo'
+    },
+    {
+        name: 'react-markdown-blog',
+        linkTo: 'https://github.com/GranataThiago/react-markdown-blog',
+        description: 'Proyecto muy simple en el que podemos escribir posts y mostrarlos en nuestra página utilizando Markdown.',
+        techs: 'React'
+    },
+    {
+        name: 'coloricker',
+        linkTo: 'https://github.com/GranataThiago/coloricker-front',
+        description: 'Con coloricker podemos crear paletas de colores mediante imagen utilizando la API de Clarifai.',
+        techs: 'React, Node, Express, Postgre'
+    }
+
+
+]
+---
+
+<style>
+
+    .my-projects{
+        margin: 4em 0em 4em 0em;
+        display: flex;
+        flex-flow: column wrap;
+    }
+
+    .projects{
+        display: flex;
+        flex-flow: column wrap;
+        gap: 1em;
+    }
+
+</style>
+
+<section class="my-projects">
+
+    <h3 class="section-title">Proyectos</h3>
+
+    <div class="projects">
+
+        {
+            projects.map(({name, description, techs, linkTo}) => {
+                return  <SinglePost title={name} description={description} techs={techs} link={linkTo}/>
+            })
+        }
+
+
+    </div>
+
+</section>

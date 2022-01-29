@@ -1,0 +1,116 @@
+:root {
+	font-family: "Roboto", BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+		sans-serif, Apple Color Emoji, Segoe UI Emoji;
+	--user-font-scale: 1rem - 16px;
+	font-size: clamp(
+		0.875rem,
+		0.4626rem + 1.0309vw + var(--user-font-scale),
+		1.125rem
+	);
+
+	--clr-primary: #efefef;
+	--clr-secondary: #0e0e1c;
+	--clr-cards: #101216;
+	--clr-text-card: #efefef;
+	--clr-detail: #4f8bff;
+	--clr-detail-secondary: #101020;
+
+	--fs-sm: 1rem;
+	--fs-md: 1.375rem;
+	--fs-lg: 2.125rem;
+	--fs-xl: 2.5rem;
+
+	--bg-gradient: linear-gradient(
+			230deg,
+			hsl(0deg 0% 96%) 0%,
+			hsl(233deg 29% 94%) 10%,
+			hsl(233deg 43% 91%) 20%,
+			hsl(232deg 51% 89%) 30%,
+			hsl(232deg 56% 87%) 40%,
+			hsl(231deg 59% 85%) 50%,
+			hsl(231deg 67% 84%) 60%,
+			hsl(231deg 75% 84%) 70%,
+			hsl(231deg 82% 84%) 80%,
+			hsl(231deg 89% 83%) 90%,
+			hsl(231deg 95% 83%) 100%
+		)
+		fixed;
+
+	--shadow-color: 0deg 0% 29%;
+	--medium-shadow: 0px 0.4px 0.4px hsl(var(--shadow-color) / 0.38),
+		0px 0.6px 0.6px -1.4px hsl(var(--shadow-color) / 0.35),
+		-0.1px 1.4px 1.5px -2.8px hsl(var(--shadow-color) / 0.32);
+	--strong-shadow: 0px 0.4px 0.4px hsl(var(--shadow-color) / 0.4),
+		-0.1px 1.1px 1.2px -0.9px hsl(var(--shadow-color) / 0.37),
+		-0.1px 2.9px 3.1px -1.9px hsl(var(--shadow-color) / 0.35),
+		-0.4px 7.1px 7.7px -2.8px hsl(var(--shadow-color) / 0.33);
+}
+
+:root.theme-dark {
+	/* Colors */
+	--clr-primary: #0e0e1c;
+	--clr-secondary: #efefef;
+	--clr-cards: #101216;
+
+	/* Gradients */
+	--bg-gradient: linear-gradient(
+			225deg,
+			hsl(240deg 6% 3%) 2%,
+			hsl(239deg 27% 4%) 23%,
+			hsl(237deg 38% 5%) 40%,
+			hsl(236deg 46% 6%) 54%,
+			hsl(234deg 53% 6%) 66%,
+			hsl(231deg 60% 7%) 76%,
+			hsl(232deg 68% 7%) 84%,
+			hsl(232deg 76% 8%) 90%,
+			hsl(232deg 84% 8%) 95%,
+			hsl(231deg 92% 9%) 98%,
+			hsl(231deg 100% 9%) 100%
+		)
+		fixed;
+
+	/* Shadows */
+	--shadow-color: 0deg 0% 5%;
+}
+
+body {
+	transition: 0.2s all ease-in-out;
+	background: var(--bg-gradient);
+	color: var(--clr-secondary);
+}
+
+.menu {
+	display: flex;
+	list-style: none;
+}
+
+.menu-item {
+	padding-right: 1em;
+}
+
+.menu-item a {
+	color: var(--clr-secondary);
+	text-decoration: none;
+}
+
+.section-title {
+	font-size: var(--fs-lg);
+}
+
+.section-title::before {
+	display: flex;
+	content: "";
+	position: relative;
+	left: 0;
+	bottom: -50px;
+	max-width: 350px;
+	height: 2px;
+	width: 50%; /* or 100px */
+	border-bottom: 1px solid var(--clr-secondary);
+}
+
+a {
+	text-decoration: none;
+	color: var(--clr-secondary);
+	font-weight: bold;
+}

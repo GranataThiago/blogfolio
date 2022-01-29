@@ -1,0 +1,64 @@
+---
+
+    const { title, description, techs, link } = Astro.props;
+
+---
+
+<style>
+
+.project{
+    height: 220px;
+    border-radius: 20px;
+    padding: 0.5em 1.5em;
+    box-sizing: border-box;
+    background-color: var(--clr-cards);
+    box-shadow: var(--medium-shadow);
+    color: var(--clr-text-card);
+
+    display: grid;
+
+}
+
+.project:hover{
+    transform: scale(1.1);
+    transition: 0.2s all ease-in-out;
+}
+
+.project-header{
+    display: flex;
+    align-items: center;
+    gap: 12px
+}
+
+.project-header img{
+    width: 24px;
+    height: 24px;
+}
+
+.title{
+    font-weight: bold;
+    font-size: var(--fs-md);
+}
+
+.title a {
+    color: #4F8BFF;
+}
+
+.description{
+    margin-top: 0;
+    font-weight: 300;
+    font-size: var(--fs-sm);
+}
+
+
+
+</style>
+
+<div class="project">
+            <div class="project-header">            
+                <img src="https://img.icons8.com/ios-glyphs/30/ffffff/repository.png"/>
+                <p class="title"> <a href={link}>{title}</a> </p>
+            </div>
+            <p class="description">{description}</p>
+            <p class="tech">{techs}</p>
+</div>

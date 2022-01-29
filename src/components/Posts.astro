@@ -1,0 +1,80 @@
+---
+let data = Astro.fetchContent('../pages/posts/*.md').sort((a, b) => {
+    return (new Date(b.date).getTime() - new Date(a.date).getTime());
+}); 
+
+---
+
+<style>
+
+    article{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 220px;
+        border-radius: 20px;
+        padding: 0.5em 1.5em;
+        box-sizing: border-box;
+        background-color: var(--clr-cards);
+        box-shadow: var(--medium-shadow);
+        color: var(--clr-text-card);
+    }
+
+    .text{
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        max-width: 75%;
+    }
+
+    .title{
+        font-weight: bold;
+        font-size: var(--fs-xl);
+    }
+
+    .description{   
+        font-size: var(--fs-sm);
+        font-weight: 300;
+    }
+
+    .extra{
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        background-color: rgba(180, 180, 255, 0.1);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        place-self: center;
+        margin-right: 20px;
+        box-shadow: var(--strong-shadow);
+    }
+
+    .extra a{
+        color: var(--clr-detail);
+        font-weight: bold;
+        font-size: 68px;
+        text-decoration: none;
+    }
+
+    .extra:hover{
+        transition: 0.2s all ease-in-out;
+        background-color: rgba(180, 180, 255, 0.2);
+    }
+
+</style>
+
+<div>
+    {data.map(post => (
+        <article>
+            <p class="text">
+                <span class="title">{post.title}</span>
+                <span class="description">{post.description}</span>
+            </p>
+            <div class="extra">
+                <a href={post.url}>+</a>
+            </div>
+        </article>
+    ))}
+</div>

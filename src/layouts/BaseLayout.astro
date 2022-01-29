@@ -1,0 +1,23 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import FixedHeader from '../components/FixedHeader.jsx'
+const { title, description, url } = Astro.props
+
+---
+
+  <head>
+    	<BaseHead title={title} description={description} url={url} />
+
+        <style >
+            @import "../styles/base-layout.css";
+        </style>
+  </head>
+  <body id="body">
+    <FixedHeader client:visible/>
+    
+    <main>
+
+        <slot />
+    
+    </main>
+  </body>

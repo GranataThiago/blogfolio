@@ -1,0 +1,34 @@
+.container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	max-width: 1024px;
+	margin: 0 auto;
+	place-items: center;
+	padding: 0.2em 4em;
+}
+
+header.fixed {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100vw;
+	background: linear-gradient(180deg, var(--clr-primary) 0%, transparent);
+}
+
+.container h1 {
+	place-self: center start;
+}
+
+.container .header__actions {
+	place-self: center end;
+}
+
+.header__navigation {
+	display: flex;
+	place-self: center end;
+}
+
+.menu .menu-item:last-child {
+	padding: 0;
+}

@@ -1,0 +1,20 @@
+---
+// Component Imports
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Hero from '../components/sections/Hero.astro'
+import About from '../components/sections/About.astro'
+import Skills from '../components/sections/Skills.astro'
+import Projects from '../components/sections/Projects.astro'
+
+
+const url = Astro.site.href;
+
+---
+<BaseLayout title="Thiago" description="Thiago Granata" url={url}>
+
+	<Hero/>
+	<About/>
+	<Skills/>
+	<Projects/>
+
+</BaseLayout>
