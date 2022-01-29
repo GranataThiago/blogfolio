@@ -67,7 +67,7 @@ const lastPost = Astro.fetchContent('../../pages/posts/*.md').sort((a, b) => {
             border-radius: 20px;
         }
 
-        .last-post a{
+        .last-post a{ 
             text-decoration: none;
             color: var(--clr-text-cards);
         }
@@ -88,7 +88,25 @@ const lastPost = Astro.fetchContent('../../pages/posts/*.md').sort((a, b) => {
                 font-size: var(--fs-xl);
                 margin:  0;
             }
-            .last-post article{
+            .last-post a{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+
+        }
+
+        @media (max-width: 500px){
+            .title-mobile{
+                font-size: var(--fs-md);
+            }
+            .last-post{
+                padding: 0;
+            }
+            .last-post a{
+                place-self: end;
+            }
+            .last-post a article{
                 width: 100%;
             }
         }
