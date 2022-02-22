@@ -36,40 +36,40 @@ Luego de realizar las pruebas, hice una lista de los puntos a mejorar:
 
 Comencé a trabajar desde arriba hacia abajo en la web. Así que comencé por agregar el atributo 'lang' a la etiqueta HTML
 
-```
-<html lang="es">
+```html
+<html lang="es"></html>
 ```
 
 Despues agregué un nombre descriptivo a el botón para cambiar el tema del sitio usando 'aria-label'
 
-```
+```html
 <button aria-label="cambiar tema"></button>
 ```
 
 Un punto muy importante era que en el sobre mí los enlaces que te redireccionan a mis otras redes sociales sean más comprensibles, para eso agregué un title dentro del path de cada svg. Quedando algo como esto:
 
-```
+```html
 <svg>
-        <path>
-            <title>Twitter</title>
-        </path>
+	<path>
+		<title>Twitter</title>
+	</path>
 </svg>
 ```
 
 En la sección skills, donde muestro los iconos de cada tecnologia con la que trabajé utilizaba simplemente muchos `<i>`. Asi que lo reemplacé por una lista desordenada y a cada `<i>` se le agregó un padre `<li>`
 Tambien le agregue un aria-label para que mencione la tecnologia al pasar por ella.
 
-```
+```html
 <ul>
-    <li aria-label="HTML"><i class="devicon-html5-plain"></i></li>
-    ...
+	<li aria-label="HTML"><i class="devicon-html5-plain"></i></li>
+	...
 </ul>
 ```
 
 Por último, tenia que agregar el texto alternativo pendiente en las iamgenes de cada proyecto.
 
-```
-<img src="..." alt="icono proyecto"/>
+```html
+<img src="..." alt="icono proyecto" />
 ```
 
 ## Conclusiones

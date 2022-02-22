@@ -114,3 +114,11 @@ a {
 	color: var(--clr-secondary);
 	font-weight: bold;
 }
+
+pre code {
+	display: block;
+	background-color: var(--clr-primary);
+	color: var(--clr-secondary);
+	padding: 0.5em;
+	margin-left: 1em;
+}
