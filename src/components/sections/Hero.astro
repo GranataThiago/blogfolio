@@ -3,7 +3,7 @@
 import Note from '../Note.astro'
 
 const lastPost = Astro.fetchContent('../../pages/posts/*.md').sort((a, b) => {
-    return (new Date(b.date).getTime() - new Date(a.date).getTime());
+    return (new Date(a.date).getTime() - new Date(b.date).getTime());
 }).pop();
 
 ---
