@@ -54,7 +54,7 @@ let data = Astro.fetchContent('../pages/posts/*.md').sort((a, b) => {
     .extra a{
         color: var(--clr-detail);
         font-weight: bold;
-        font-size: 68px;
+        font-size: var(--fs-xl);
         text-decoration: none;
     }
 
@@ -73,7 +73,7 @@ let data = Astro.fetchContent('../pages/posts/*.md').sort((a, b) => {
                 <span class="description">{post.description}</span>
             </p>
             <div class="extra">
-                <a href={post.url}> ➤ </a>
+                <a href={post.url}> <span aria-label="entrar al post">➤</span></a>
             </div>
         </article>
     ))}
