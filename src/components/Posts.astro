@@ -65,7 +65,7 @@ let data = Astro.fetchContent('../pages/posts/*.md').sort((a, b) => {
 
 </style>
 
-<div>
+<section>
     {data.map(post => (
         <article>
             <p class="text">
@@ -77,4 +77,4 @@ let data = Astro.fetchContent('../pages/posts/*.md').sort((a, b) => {
             </div>
         </article>
     ))}
-</div>
+</section>

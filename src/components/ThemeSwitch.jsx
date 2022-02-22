@@ -46,7 +46,7 @@ const ThemeSwitch = () => {
 
     }
 
-    return <button style={{border: 'none', backgroundColor: 'transparent'}} onClick={toggleTheme}>{icons[theme]}</button>
+    return <button aria-label="cambiar tema" style={{border: 'none', backgroundColor: 'transparent'}} onClick={toggleTheme}>{icons[theme]}</button>
 };
 
 export default ThemeSwitch;

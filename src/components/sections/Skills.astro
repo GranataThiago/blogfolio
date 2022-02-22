@@ -37,7 +37,22 @@
         border-color: var(--clr-secondary);
         background-color: var(--clr-detail-secondary);
     }
+    
+    ul{
+        list-style: none;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 0px;
+        margin: 0px;
+    }
 
+    li{
+        width: 5rem;
+        height: 5rem;
+    }
 </style>
 
 <section class="skills">
@@ -47,18 +62,20 @@
     <div class="skills-extra">
         <p class="description">Mi punto de entrada real a la programación fue aprendiendo <strong>algoritmos y estructuras de datos con C++ en 2018 </strong>. En los años posteriores aprendí a gestionar y crear bases de datos con <strong>MySQL</strong> y realizar mis primeras aplicaciones con <strong>.NET</strong>. Por último, comencé a aprender <strong>Java</strong> realizando un proyecto escolar en el que habia que realizar un videojuego multijugador, mientras por mi cuenta me adentraba en el mundo del desarrollo web aprendiendo <strong>HTML, CSS y Javascript</strong>. Ahí es cuando descubrí lo que realmente me gustaba y decidí profundizar ese sector aprendiendo frameworks como <strong>React o Angular y además Node junto a Express y Mongo</strong>. A lo largo de estos 4 años, estas fueron las tecnologias/herramientas que mas utilicé:</p>
 
-        <i class="devicon-html5-plain "></i>
-        <i class="devicon-css3-plain "></i>
-        <i class="devicon-javascript-plain "></i>
-        <i class="devicon-java-plain "></i>  
-        <i class="devicon-react-original "></i>
-        <i class="devicon-typescript-plain "></i>
-        <i class="devicon-angularjs-plain "></i>
-        <i class="devicon-nodejs-plain "></i>
-        <i class="devicon-mysql-plain "></i>
-        <i class="devicon-mongodb-plain "></i>
-        <i class="devicon-git-plain "></i>
-        <i class="devicon-github-original"></i>
+        <ul>
+            <li aria-label="HTML"><i class="devicon-html5-plain"></i></li>
+            <li aria-label="css"><i class="devicon-css3-plain"></i></li>
+            <li aria-label="javascript"><i class="devicon-javascript-plain"></i></li>
+            <li aria-label="Java"><i class="devicon-java-plain"></i></li>  
+            <li aria-label="React"><i class="devicon-react-original"></i></li>
+            <li aria-label="Typescript"><i class="devicon-typescript-plain"></i></li>
+            <li aria-label="Angular"><i class="devicon-angularjs-plain"></i></li>
+            <li aria-label="Node"><i class="devicon-nodejs-plain"></i></li>
+            <li aria-label="MySQL"><i class="devicon-mysql-plain"></i></li>
+            <li aria-label="Mongo"><i class="devicon-mongodb-plain"></i></li>
+            <li aria-label="GIT"><i class="devicon-git-plain"></i></li>
+            <li aria-label="GITHUB"><i class="devicon-github-original"></i></li>
+        </ul>
     </div>
 
 </section>

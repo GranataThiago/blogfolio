@@ -115,24 +115,24 @@ const lastPost = Astro.fetchContent('../../pages/posts/*.md').sort((a, b) => {
 
 <main>
 
-        <div class="last-post"> 
+        <section class="last-post"> 
             <div class="last-post__info">
                 <h2 class="title-mobile">Mi último articulo</h2>
                 <h2 class="title">Hola, acá Thiago!</h2>
-                <p class="subtitle">Mirá mi último articulo →</p>
+                <p class="subtitle">Mirá mi último articulo <span aria-label="flecha hacia la derecha">→</span></p>
             </div>
             <a href={lastPost.url}>
                 <article>
                     <h3>{lastPost.title}</h3>
                 </article>
             </a>
-        </div>
+        </section>
 
-		<div class="note-container">
-
+        <h2 class="header">Nota del dia</h2>
+		<section class="note-container">
 			<Note title="Gradient Generator 🚀"  description="En esta página vas a poder crear degradados muy lindos y muy rápido" redirect="https://www.joshwcomeau.com/gradient-generator/"/>
             <Note title="Flexbox Gap"  description="Sabias que podes utilizar la propiedad gap para separar tus elementos flexbox?" redirect=""/>
 
-		</div>
+		</section>
 
 </main>
