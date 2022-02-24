@@ -52,7 +52,7 @@ const Contact = () => {
                 <label htmlFor="subject" className="contact-label">Asunto</label>
                 <input required type="text" name="subject" placeholder="[OFERTA] Propuesta muy importante" className="contact-input" onChange={handleInputChange} value={subject}/>
 
-                <label htmlFor="message" className="contact-label">Tu nombre</label>
+                <label htmlFor="message" className="contact-label">Mensaje</label>
                 <textarea required name="message" placeholder="Escribí tu mensaje acá..." className="contact-input contact-area" onChange={handleInputChange} value={message}/>
 
                 <button type="submit" className="primary-button send">Enviar mensaje</button>
