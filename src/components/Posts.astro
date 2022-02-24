@@ -6,6 +6,16 @@ let data = Astro.fetchContent('../pages/posts/*.md').sort((a, b) => {
 ---
 
 <style>
+    .extra-mobile{
+        display: none;
+    }
+
+    .line-clamp{
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
+    }
 
     article{
         display: flex;
@@ -64,18 +74,57 @@ let data = Astro.fetchContent('../pages/posts/*.md').sort((a, b) => {
         background-color: rgba(180, 180, 255, 0.2);
     }
 
-</style>
+    @media (max-width: 670px){
+        .title{
+            font-size: var(--fs-lg);
+        }
+        .extra{
+            width: 60px;
+            height: 60px;   
+        }
+
+        .extra a{
+            font-size: var(--fs-md);
+        }
+    }
+
+    @media (max-width: 500px){
+        .title{
+            font-size: var(--fs-md);
+        }
+
+        article{
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .text{
+            max-width: 100%;
+        }
+
+        .extra{
+            display: none;
+        }
+
+        .extra-mobile{
+            display: flex;
+            border-bottom: 1px solid #522ac3;
+            padding: 0.1em;
+        }
+    }
+</style>    
 
 <section>
     {data.map(post => (
         <article>
             <p class="text">
-                <span class="title">{post.title}</span>
+                <span class="title line-clamp">{post.title}</span>
                 <span class="description">{post.description}</span>
             </p>
             <div class="extra">
                 <a href={post.url}> <span aria-label="entrar al post">➤</span></a>
             </div>
+            <a class="extra-mobile" href={post.url}>Continuar leyendo</a>
         </article>
     ))}
 </section>
