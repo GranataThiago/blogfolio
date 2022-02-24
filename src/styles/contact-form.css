@@ -1,0 +1,40 @@
+.contact__form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+input,
+select,
+textarea {
+	color: var(--clr-secondary);
+}
+
+textarea:focus,
+input:focus {
+	border: 1px solid var(--clr-detail);
+}
+
+.contact-label {
+	font-weight: 400;
+	margin: 1rem 0 0.5rem 0;
+}
+
+.contact-input {
+	height: var(--fs-lg);
+	background-color: var(--clr-primary);
+	border: none;
+	padding: 0.5rem;
+}
+
+.contact-area {
+	height: 150px;
+	font-family: inherit;
+	resize: none;
+}
+
+.send {
+	margin: 1rem 0 1rem 0;
+	padding: 1rem 0;
+	color: var(--clr-secondary);
+}

@@ -5,6 +5,8 @@ import Hero from '../components/sections/Hero.astro'
 import About from '../components/sections/About.astro'
 import Skills from '../components/sections/Skills.astro'
 import Projects from '../components/sections/Projects.astro'
+import Contact from '../components/sections/Contact.jsx'
+
 
 const url = Astro.site.href;
 
@@ -15,5 +17,6 @@ const url = Astro.site.href;
 	<About/>
 	<Skills/>
 	<Projects/>
+	<Contact client:visible/>
 
 </BaseLayout>

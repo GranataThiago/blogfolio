@@ -141,3 +141,19 @@ pre code {
 #post-content {
 	margin-bottom: 5rem;
 }
+
+.primary-button {
+	box-sizing: border-box;
+	border-radius: 5px;
+	background-color: #6435eb;
+	border: none;
+	box-shadow: 0px 2px 20px 1px rgba(188, 46, 255, 0.2);
+	padding: 0.5em 1.2em;
+	font-weight: 600;
+}
+
+.primary-button:hover {
+	cursor: pointer;
+	transition: 0.2s all ease-in-out;
+	background-color: #381a8d;
+}
