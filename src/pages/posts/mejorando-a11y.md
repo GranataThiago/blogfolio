@@ -12,7 +12,7 @@ El otro dia generé un reporte de [lighthouse](https://chrome.google.com/webstor
 
 Como mencioné arriba, el primer reporte que generé fue el de lighthouse y este fue el resultado
 
-![Resultados Lighthouse](https://www.tmgranata.com/assets/blogs/a11y/Accesibilidad2.webp)
+![Resultados Lighthouse](https://www.tmgranata.com/assets/blogs/a11y/Accesibilidad.webp)
 
 También realicé alguna otras pruebas para tratar de abarcar la mayor cantidad de casos posibles, como:
 
@@ -76,6 +76,6 @@ Por último, tenia que agregar el texto alternativo pendiente en las iamgenes de
 
 Luego de todos los cambios realizados, volví a generar un reporte de Lighthouse y estos fueron los resultados:
 
-![Resultado Lighthouse Final](https://www.tmgranata.com/assets/blogs/a11y/Accesibilidad-final.webp)
+![Resultado Lighthouse Final](https://www.tmgranata.com/assets/blogs/a11y/Accesibilidad2.webp)
 
 Obviamente quedan cosas por mejorar. Como hacer un carrusel más accesible para mostrar la nota del dia. Pero estoy feliz del resultado (y de haber cumplido el objetivo propuesto) por ser mi primer contacto con la accesibilidad en la web.
