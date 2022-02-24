@@ -115,10 +115,12 @@ a {
 	font-weight: bold;
 }
 
+pre {
+	border-radius: 2px;
+}
+
 pre code {
 	display: block;
-	background-color: var(--clr-primary);
-
 	padding: 0.5em;
 	margin-left: 1em;
 	overflow: hidden;
