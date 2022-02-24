@@ -2,6 +2,7 @@
 // src/layouts/PostLayout.astro
 import BaseLayout from './BaseLayout.astro'
 
+
 const { content } = Astro.props;
 const url = Astro.site.href;
 ---
@@ -13,7 +14,7 @@ const url = Astro.site.href;
   </style>
 <BaseLayout title={content.title} description={content.description} url={url}>
     <h1>{content.title}</h1>
-    <article>
+    <article id="post-content">
       <slot />
     </article>
 </BaseLayout>

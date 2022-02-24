@@ -118,7 +118,25 @@ a {
 pre code {
 	display: block;
 	background-color: var(--clr-primary);
-	color: var(--clr-secondary);
+
 	padding: 0.5em;
 	margin-left: 1em;
+	overflow: hidden;
+}
+
+#post-content {
+	line-height: 1.35rem;
+}
+
+#post-content img {
+	width: 100%;
+}
+
+#post-content a {
+	background-color: #522ac3;
+	padding: 0.1em;
+}
+
+#post-content {
+	margin-bottom: 1rem;
 }

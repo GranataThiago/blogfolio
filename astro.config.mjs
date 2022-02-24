@@ -14,4 +14,18 @@ export default {
   renderers: [
     "@astrojs/renderer-react"
   ],
+  markdownOptions: {
+    render: [
+      '@astrojs/markdown-remark',
+      {
+        // Pick a syntax highlighter. Can be 'prism' (default), 'shiki' or false to disable any highlighting.
+        syntaxHighlight: 'shiki',
+        shikiConfig: {
+          theme: 'github-dark',
+          langs: ['js', 'html', 'css', 'astro'],
+          wrap: false,
+        },
+      },
+    ],
+  },
 };

@@ -72,6 +72,10 @@ Por último, tenia que agregar el texto alternativo pendiente en las iamgenes de
 <img src="..." alt="icono proyecto" />
 ```
 
+```js
+const PI = 3.14;
+```
+
 ## Conclusiones
 
 Luego de todos los cambios realizados, volví a generar un reporte de Lighthouse y estos fueron los resultados:
