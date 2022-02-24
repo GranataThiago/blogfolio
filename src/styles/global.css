@@ -117,13 +117,13 @@ a {
 
 pre {
 	border-radius: 2px;
+	overflow: scroll;
 }
 
 pre code {
 	display: block;
 	padding: 0.5em;
 	margin-left: 1em;
-	overflow: hidden;
 }
 
 #post-content {
