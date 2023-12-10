@@ -1,0 +1,132 @@
+---
+title: ¿Qué es la Accesibilidad Web?
+author: Thiago Granata
+date: 2023-12-13
+image: ../images/accesibilidad.webp
+summary: La accesibilidad es el conjunto de caracteristicas que un sitio debe poseer para ser usable por la mayor cantidad de usuarios sin importar sus circunstancias. Como desarrolladores podemos diseñar sitios accesibles teniendo en cuenta las WCAG, y utilizando las herramientas que nos provee la especificación ARIA.
+relatedPosts: [como-desarrolle-mi-blog]
+categories: [accesibilidad]
+---
+
+> Utilizando técnicas de diseño accesible logramos que un rango amplísimo de personas en situaciones dispares sea capaz de disfrutar de experiencias que van más allá
+> de "leer" la web, como poder rellenar una solicitud de empleo, reírse de un chiste que se cuenta en un video, o hacer una videoconferencia con la familia. Y todo ello
+> sin importar si la persona que accede a nuestra experiencia tiene una discapacidad, es poco hábil, está en un entorno complicado o se conecta a través de un dispositivo con funcionalidad limitada <br/>
+> -- Accesibilidad Web, WCAG 2.1 de forma sencilla
+
+__Aclaración:__
+Este artículo es una reescritura de un post que existia en mi [antiguo blog](como-desarrolle-mi-blog), del cual no me gustaba el enfoque y decidí rehacerlo desde un punto de vista más didáctico con enfoques prácticos que aplique en esta web.
+
+## ¿Qué significa que un sitio sea "accesible"?
+
+Siempre creí que denominar a un sitio web como "accesible" significaba que las personas con discapacidades tambien puedan disfrutar del contenido del mismo, 
+y sí bien es razón más que suficiente para comenzar a tomar un enfoque más accesible en el diseño de nuestras webs, la realidad es que trasciende eso.
+Hay un enfoque muy interesante en el libro de [Accesibilidad Web, WCAG 2.1 de forma sencilla](https://olgacarreras.blogspot.com/2018/11/libro-accesibilidad-web-wcag-21-de.html) que me hizo darme cuenta de esto: los problemas que pueden afectar
+a personas de forma _temporal_ o _permanente_, tambien __los podemos sufrir nosotros en situaciones cotidianas__. _Por ejemplo_: la dificultad de una persona tetrapléjica para apuntar con el cursor, son parecidas a las que tienen los ancianos.
+
+Entonces, __¿qué es la accesibilidad en un sitio web?__. _Para mí_ es crear webs con el objetivo de que sean __usables__ para la __mayor cantidad de personas posibles__, __sin importar__ en que __circunstancia__ se encuentren.
+
+Si todo esto no te pareció un motivo suficiente para interesarte por la accesibilidad, es esencial destacar que las __WCAG 2.0__ son __legalmente obligatorias__ en muchos países. El incumplimiento de estas pautas puede resultar en sanciones económicas en ciertas jurisdicciones.
+
+## Pautas de Accesibilidad para el Contenido Web (WCAG)
+
+Las [Pautas de Accesibilidad para el Contenido Web (WCAG)](https://www.w3.org/WAI/standards-guidelines/wcag/es) son un estándar técnico, desarrollado por la [W3C](https://www.w3.org/), que tiene como fin satisfacer las necesidades de las personas, organizaciones o gobiernos a nivel internacional.
+
+El estándar está conformado por _13 pautas_ organizadas en [4 principios](https://www.w3.org/WAI/WCAG21/Understanding/intro#understanding-the-four-principles-of-accessibility):
+
+- [Perceptible](https://www.w3.org/TR/WCAG22/#perceivable): debemos contar con alternativas textuales para cualquier contenido no-textual para que pueda ser intercambiado a otras formas que la gente necesite (braille, narrador, simbolos, etc.).
+- [Operable](https://www.w3.org/TR/WCAG22/#operable): los componentes de la interfaz de usuario y navegación deben ser operables, es decir, manejados por usuarios de diferentes capacidades.
+- [Comprensible](https://www.w3.org/TR/WCAG22/#understandable): la información y forma de operar que presentemos en nuestra web debe ser comprensible.
+- [Robusto](https://www.w3.org/TR/WCAG22/#robust): maximizar la compatibilidad con [__agentes de usuario__](https://es.wikipedia.org/wiki/Agente_de_usuario) actuales y futuros, incluyendo [__tecnologias de apoyo__](https://www.atia.org/home/at-resources/what-is-at/). 
+
+Para cada pauta contamos con tres [_criterios de conformidad_](https://www.w3.org/WAI/WCAG21/Understanding/conformance#levels): __A, AA y AAA__
+
+
+## WAI-ARIA
+
+Muchas veces, las aplicaciones webs actuales cuentan con controles no nativos que los lectores de pantallas no comprenden. Por ejemplo: HTML no cuenta con una forma semántica de
+describir un menú desplegable (como si tenemos para describir un menú de navegación `<nav>` o un footer `<footer>`), nosotros creamos esos componentes manualmente y las tecnologías de apoyo no tienen forma de entender que son o como describirlos excepto que lo especifiquemos.
+
+Ahí es donde entra __ARIA__ (Accesible Rich Internet Aplications) a desempeñar un papel fundamental. [WAI-ARIA](https://developer.mozilla.org/en-US/docs/Learn/Accessibility/WAI-ARIA_basics) es una especificación escrita por la W3C que nos ayuda con estos problemas añadiendo una serie de atributos HTML que pueden aplicarse a elementos para otorgarle semántica adicional y mejorar la accesibilidad.
+Esto hace que los navegadores y las tecnologias de apoyo puedan reconocer estos elementos más claramente y describirles correctamente el contenido de nuestro sitio a un usuario.
+
+En la especificación se definen 3 caracteristicas principales:
+
+- [Roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles): definen que es o que función va a cumplir el elemento.
+- [Propiedades](https://www.w3.org/TR/wai-aria-1.1/#state_prop_def): le agregan propiedades a los elementos, que pueden ser utilizadas para añadirle un mejor significado o semantica.
+- [Estados](https://www.w3.org/TR/wai-aria-1.1/#state_prop_def): propiedades especiales que definen la condición actual de los elementos. Son diferentes de las propiedades ya que el estado puede cambiar a lo largo del ciclo de vida de nuestra app.
+
+Por ejemplo, una forma de aplicar esta especificación es la siguiente:
+
+```html
+<div role="button" tabindex="0" id="submit-btn">
+    Enviar
+</div>
+```
+
+Este ejemplo muestra como aplicar la especificación ARIA para que un `<div>` se comporte como un botón, utilizando el _role_ y el _tabindex_ para que nuestro elemento sea focusable. A pesar de ser una técnica válida, no es algo que querramos hacer.
+Cuando sea viable, es más conveniente utilizar la etiqueta HTML correspondiente.
+
+```html
+<!-- Este sería el equivalente utilizando HTML semántico -->
+<button id="submit-btn">
+    Enviar
+</button>
+```
+
+## ¿Cómo revisar la accesibilidad de nuestra web?
+
+Para verificar la accesibilidad de nuestra web contamos con varias herramientas:
+
+- Lighthouse: un reporte de Lighthouse puede ser un buen punto de partida pero no garantiza que nuestra web sea accesible ya que al ser una prueba automática solo detecta algunos errores por lo que las pruebas manuales siguen siendo necesarias. 
+- Devtools (Chrome): en Chrome podemos simular deficiencias visuales como visión borrosa, contraste reducido o ciertos tipos de daltonismos (More Tools -> Rendering)
+- Lectores de pantalla: con [NVDA](https://www.nvaccess.org/download/) o VoiceOver vamos a poder escuchar como se anuncia cada elemento de nuestro sitio y determinar si es comprensible. 
+
+Existen muchas más herramientas y recursos que podemos utilizar para revisar la accesibilidad de nuestro sitio como el [Servicio de Validación de W3C](https://validator.w3.org/) para validar nuestro código o [Siteimprove](https://chromewebstore.google.com/detail/siteimprove-accessibility/efcfolpjihicnikpmhnmphjhhpiclljc) que valida __ciertos criterios de accesibilidad__. 
+Tambien hay sitios donde podemos verificar que el contraste ente colores cumpla con los criterios como este [ContrastChecker de WebAIM](https://webaim.org/resources/contrastchecker/)
+
+## Manos a la obra 🔨
+
+Llegó el momento de intentar implementar estos estándares y especificaciones en mi web.
+
+Para comenzar tomé nota de algunos de los errores que me encontré emulando deficiencias visuales y navegando con los lectores de pantalla:
+
+Al emular deficiencias visuales noté que en ciertas secciones de la web el texto no se logra leer con claridad. Con algunos ajustes en el diseño, las fuentes y colores ajuste bastante mejor el contraste. 
+
+Probando la navegación con el lector de pantalla NVDA noté algunos errores en enlaces, _por ejemplo_ al utilizar este cáracter → se leé su nombre y no queda claro para qué sirve.
+Para que tenga más sentido, le agregué un aria-label al enlace, por lo que se leerá "Mi último artículo [...] ¿Qué es la accesibilidad web?"
+
+```html
+<a aria-label="Mi último artículo">
+ Te invito a leer mi último artículo →
+</a>
+```
+
+Tambien, en la sección principal, al tener el texto con varios niveles de anidación, la lectura del heading ("Hola, soy Thiago" + "Fullstack Developer") era un poco rara.
+
+Esto lo solucioné utilizando el `aria-labelledby` combinando ambos elementos para que el mensaje de presentación se lea seguido: "Hola, soy Thiago, Fullstack Developer."
+
+```html
+(...)
+<h1 id="soy-thiago" aria-labelledby="soy-thiago work-role">
+    Hola!
+    <span>Soy Thiago!</span>
+</h1>
+
+<p aria-hidden="true" id="work-role">Fullstack Developer</p>
+(...)
+```
+
+Al narrar las tecnologias con las que trabaje se leía como "Lista de 5 elementos, elemento 1, Next". Consideré que se podia sumarle algo de contexto para que se lea
+"Tecnologías que utilizo, lista de 5 elementos (...)":
+
+```html
+<ul aria-label="Tecnologías que utilizo">
+    (...)
+</ul>
+```
+
+
+## Referencias
+- [W3](https://www.w3.org/WAI/) 
+- [MDN](https://developer.mozilla.org/en-US/docs/Learn/Accessibility/)
+- [Accesibilidad Web, WCAG 2.1 de forma sencilla](https://olgacarreras.blogspot.com/2018/11/libro-accesibilidad-web-wcag-21-de.html)

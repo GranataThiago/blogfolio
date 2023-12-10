@@ -1,0 +1,60 @@
+---
+import { Image } from 'astro:assets';
+import Logo from '../../assets/tmgranata.svg'
+import Icon from "astro-icon";
+
+---
+
+
+<footer class="bg-text text-background mt-2 flex min-h-[12rem] px-16 py-8 max-w-none gap-8 flex-col md:gap-0 md:flex-row">
+    <Image class="mx-auto md:mx-0" src={Logo} alt="Thiago Michay Logo" width={96} height={96}/>
+
+
+    <div class="ml-auto mr-auto flex gap-16">
+        <div>
+            <ul>
+                <li>
+                    <a href="/#about">
+                        Sobre mí
+                    </a>
+                </li>
+                <li>
+                    <a href="#projects">
+                        Proyectos
+                    </a>
+                </li>
+                <li>
+                    <a href="/#about">
+                        Experiencia
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <p class="font-mono">Redes sociales</p>
+            <ul class="flex gap-4">
+                <li>
+                    <a href="https://www.linkedin.com/in/thiago-granata-971804216">
+                        <Icon pack="ri" name="linkedin-box-fill" color="#fff" width={24} height={24}/>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/GranataThiago">
+                        <Icon pack="ri" name="github-fill" color="#fff" width={24} height={24}/>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.x.com/tmgranata">
+                        <Icon pack="ri" name="twitter-fill" color="#fff" width={24} height={24}/>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.x.com/tmgranata">
+                        <Icon pack="ri" name="youtube-fill" color="#fff" width={24} height={24}/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</footer>

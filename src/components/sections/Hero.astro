@@ -1,0 +1,56 @@
+---
+import Tag from "../ui/Tag.astro";
+import LastPost from "../ui/LastPost.astro";
+import Icon from "astro-icon";
+---
+
+
+<main id="home" class="container !my-0 !pt-0 grid gap-8 lg:grid-cols-3 lg:grid-rows-2 lg:gap-0 -z-10">
+        <h1 id="soy-thiago" aria-labelledby="soy-thiago work-role" class="font-serif font-extrabold text-text flex flex-col gap-8 justify-center place-self-center lg:place-self-auto text-6xl xl:text-7xl">
+            Hola, soy
+            <span class="text-7xl font-black xl:text-8xl">Thiago!</span>
+        </h1>
+
+        <div class="flex flex-col gap-8 justify-center place-self-center text-center lg:text-start lg:place-self-auto">
+            <p aria-hidden="true" id="work-role" class="font-serif font-medium text-text text-4xl text-center">Fullstack Developer</p>
+            <ul aria-label="Tecnologías que utilizo" class="flex flex-wrap gap-4 justify-center">
+                <li>
+                    <Tag>Next</Tag>
+                </li>
+                <li>
+                    <Tag>Express</Tag>
+                </li>
+                <li>
+                    <Tag>Nest</Tag>
+                </li>
+                <li>
+                    <Tag>MongoDB</Tag>
+                </li>
+                <li>
+                    <Tag>PostgreSQL</Tag>
+                </li>
+    
+            </ul>
+        </div>
+
+        <div class="flex flex-col gap-8 items-center justify-center place-self-center lg:place-self-auto">
+            <ul class="flex gap-16">
+                <li>
+                    <a aria-label="Mi Linkedin" href="https://www.linkedin.com/in/thiago-granata-971804216">
+                        <Icon pack="ri" name="linkedin-box-fill" color="#282D40" width={48} height={48}/>
+                    </a>
+                </li>
+                <li>
+                    <a aria-label="Mi Github" href="https://github.com/GranataThiago">
+                        <Icon pack="ri" name="github-fill" color="#282D40" width={48} height={48}/>
+                    </a>
+                </li>
+                <li>
+                    <a aria-label="Mi Twitter" href="https://www.x.com/tmgranata">
+                        <Icon pack="ri" name="twitter-fill" color="#282D40" width={48} height={48}/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    <LastPost />
+</main>

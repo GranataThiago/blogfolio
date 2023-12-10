@@ -1,0 +1,7 @@
+---
+const { className } = Astro.props;
+---
+
+<div class:list={[className, "bg-gradient-to-r from-secondary to-primary px-4 py-1 font-bold text-background rounded-2xl"]}>
+    <slot />
+</div>

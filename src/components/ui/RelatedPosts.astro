@@ -1,0 +1,22 @@
+---
+import { getEntries } from "astro:content";
+import PostThumbnail from "./PostThumbnail.astro";
+
+const { relatedPosts } = Astro.props;
+const posts = await getEntries(relatedPosts);
+---
+
+
+<div>
+    <p class="font-mono font-bold text-xl">Posts relacionados</p>
+    <hr class="my-4">
+    <ul class="flex flex-col gap-4">
+        {
+            posts.map((post: any) => (
+                <li class=" border-text border-4 hover:translate-x-1 hover:transition-all">
+                    <PostThumbnail post={post}/>
+                </li>
+            ))
+        }
+    </ul>
+  </div>

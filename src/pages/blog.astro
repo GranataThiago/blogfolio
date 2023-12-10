@@ -1,0 +1,57 @@
+---
+import Input from "../components/ui/Input.astro";
+import PostList from "../components/ui/PostList.astro";
+import Tag from "../components/ui/Tag.astro";
+import Layout from "../layouts/Layout.astro";
+import BlogImage from '../content/images/blog.png'
+
+const categories = [
+    {
+        name: 'personal',
+        displayName: 'Personal'
+    },
+    {
+        name: 'computacion',
+        displayName: 'Computación'
+    },
+    {
+        name: 'bd',
+        displayName: 'BBDD'
+    },
+    {
+        name: 'programacion',
+        displayName: 'Programación'
+    },
+    {
+        name: '',
+        displayName: 'Limpiar Filtros'
+    }
+]
+---
+
+
+
+<Layout title="Thiago Granata | Blog" description="Explorá mis últimos artículos y pensamientos. Desde tips de programación a innovaciones técnicas." imageUrl={BlogImage}>
+    <main class="container !p-0 !mt-4">
+        <Input class="mb-4" placeholder="Buscar..."></Input>
+        <section class="articles flex gap-8 flex-col-reverse lg:flex-row">
+            <PostList />
+            <aside class="font-mono text-text basis-1/4">
+                <p class="text-3xl mb-2">Categorias</p>
+                <ul class="flex gap-4 flex-wrap">
+                    {
+                        categories.map(category => (
+                            <li>
+                                <a href={`?c=${category.name}`}>
+                                    <Tag>{category.displayName}</Tag>   
+                                </a>    
+                            </li>
+                        ))
+                    }
+                </ul>
+            </aside>
+        </section>
+
+    </main>
+
+</Layout>

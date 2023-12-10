@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets';
+import Button from '../ui/Button.astro';
+import Logo from '../../assets/tmgranata.svg'
+import DropdownNav from '../ui/DropdownNav.svelte';
+---
+
+<header class="flex justify-between items-center container !my-0 !px-0 !py-4 mx-auto bg-background">
+    <a href="/" class="z-10">
+        <Image src={Logo} alt="Thiago Granata Logo" width={64} height={64}>
+    </a>        
+    
+    <DropdownNav client:load/>
+    <Button class="z-10">
+        <a href="/blog">
+            Blog
+        </a>
+    </Button>
+</header>

@@ -1,0 +1,19 @@
+---
+import TaggedContainer from "./TaggedContainer.astro";
+const { tasks } = Astro.props
+---
+
+
+<TaggedContainer tag={'TO-DO LIST'} class="bg-text p-2">
+    <ul class="m-0 list-none">
+        {
+            tasks.map((task: any) => (
+                <li class:list={["m-0 flex gap-4 text-background", task.completed ? 'line-through' : '']}>
+                    <input disabled type="checkbox" checked={task.completed} />
+                    <p class="m-0">{task.name}</p>    
+                </li>
+            ))
+        }
+    </ul>
+</TaggedContainer>
+

@@ -1,0 +1,10 @@
+---
+import { Image } from "astro:assets";
+import PlaceholderImage from '../../assets/images.jpg'
+
+const { post } = Astro.props;
+---
+
+<a href={`/blog/${post.slug}`} class="bg-text w-full h-full">
+    <Image class="m-auto aspect-video" width={500} height={224} src={post.data?.image || PlaceholderImage} alt={post.data.title} />
+</a>

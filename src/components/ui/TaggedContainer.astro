@@ -1,0 +1,22 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+export interface TaggedContainerProps extends HTMLAttributes<'div'>{
+    tag: string,
+    right: boolean;
+}
+
+const { class: className, tag, right } = Astro.props;
+---
+
+<div class:list={["relative", className]}>
+    {
+        tag ?
+        <div class:list={["absolute -top-4 bg-text px-2", right ? 'right-4' : 'left-4']}>
+            <p class="text-sm text-background m-0">{tag}</p>
+        </div>
+        : null
+    }
+    
+    <slot />
+</div>

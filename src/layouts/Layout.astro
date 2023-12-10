@@ -1,0 +1,98 @@
+---
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/700.css';
+import Navbar from '../components/sections/Navbar.astro';
+import { ViewTransitions } from 'astro:transitions';
+
+interface Props {
+	title: string;
+	description: string;
+	imageUrl?: ImageMetadata;
+}
+
+const { title, description, imageUrl } = Astro.props;
+const url = Astro.url;
+---
+
+<!doctype html>
+<html lang="en" >
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description}>
+		<meta name="keywords" content="blog, development, framework, technology, javascript, mern, mean, stack">
+		<meta name="author" content="Thiago Michay Granata">
+		<meta name="copyright" content="Thiago 2023">
+
+		<!-- Facebook -->
+		<meta property="og:title" content={title}>
+		<meta property="og:description" content={description}>
+		<meta property="og:type" content="website">
+		<meta property="og:image" content={imageUrl?.src}>
+		<meta property="og:url" content={url}>
+
+		<!-- Twitter -->
+		<meta name="twitter:creator" content="@tmgranata">
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:title" content={title}>
+		<meta name="twitter:description" content={description}>
+		<meta name="twitter:image" content={imageUrl?.src}>
+		<meta name="twitter:url" content={url}>
+		<ViewTransitions />
+	</head>
+	<body>
+		<Navbar />
+		<slot />
+	</body>
+</html>
+<style is:global>
+	html {
+		font-family: "Poppins", sans-serif;
+		background: #fff;
+	}
+
+	body{
+		box-sizing: border-box;
+	}
+
+	.container{
+		/* max-width: 1440px; */
+		margin: 4rem auto;
+		padding: 4rem 0;
+	}
+
+	.bg-custom-gradient{
+		background-image: linear-gradient(
+  125deg,
+  hsl(9deg 74% 70%) 0%,
+  hsl(17deg 77% 70%) 0%,
+  hsl(24deg 78% 70%) 0%,
+  hsl(32deg 75% 70%) 0%,
+  hsl(39deg 70% 70%) 0%,
+  hsl(49deg 62% 71%) 0%,
+  hsl(62deg 54% 73%) 1%,
+  hsl(79deg 66% 78%) 1%,
+  hsl(85deg 71% 80%) 2%,
+  hsl(68deg 58% 75%) 3%,
+  hsl(53deg 59% 71%) 5%,
+  hsl(42deg 68% 70%) 7%,
+  hsl(34deg 74% 70%) 9%,
+  hsl(27deg 77% 70%) 12%,
+  hsl(19deg 78% 70%) 16%,
+  hsl(11deg 75% 70%) 20%,
+  hsl(3deg 60% 68%) 26%,
+  hsl(354deg 44% 62%) 33%,
+  hsl(346deg 32% 56%) 43%,
+  hsl(337deg 24% 49%) 56%,
+  hsl(327deg 20% 42%) 69%,
+  hsl(313deg 16% 36%) 81%,
+  hsl(292deg 13% 30%) 92%,
+  hsl(272deg 12% 25%) 100%
+);
+	}
+
+</style>

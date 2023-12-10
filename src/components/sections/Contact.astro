@@ -1,0 +1,70 @@
+---
+import { isValidEmail } from '../../utils/validators'
+import Input from "../ui/Input.astro";
+import Textarea from "../ui/Textarea.astro";
+import Button from '../ui/Button.astro'
+import Icon from 'astro-icon'
+
+
+const errors = { name: '', email: '', message: '' };
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+    const name = data.get('name');
+    const email = data.get('email');
+    const message = data.get('message');
+    if (typeof name !== "string" || name.length < 1) {
+      errors.name += "Oops, falta tu nombre!";
+    }
+    if (typeof email !== "string" || !isValidEmail(email)) {
+      errors.email += "El email no es válido";
+    } 
+    if (typeof message !== "string") {
+      errors.email += "Oops, falta el mensaje!";
+    } 
+
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
+---
+
+
+<section id="contact" class="container contact flex justify-between gap-8 text-text flex-col md:flex-row">
+
+    <div class="flex-grow flex flex-col gap-8 bg-gradient-to-r from-secondary to-primary rounded-3xl p-6">
+        <h1 class="font-bold font-mono text-4xl">Contacto</h1>
+        <div class="mt-auto">
+            <p class="text-lg">También podés contactarme por mis redes sociales</p>
+            <ul class="flex gap-4">
+                <li>
+                    <a href="https://www.linkedin.com/in/thiago-granata-971804216">
+                        <Icon pack="ri" name="linkedin-box-fill" color="#282D40" width={36} height={36}/>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/GranataThiago">
+                        <Icon pack="ri" name="github-fill" color="#282D40" width={36} height={36}/>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.x.com/tmgranata">
+                        <Icon pack="ri" name="twitter-fill" color="#282D40" width={36} height={36}/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <form method="POST" class="flex-grow flex flex-col gap-4">
+        <div class="flex gap-4">
+            <Input error={errors.email} label="Email" name="email" type="email" placeholder="Email de contacto*" required/>
+            <Input error={errors.name} label="Nombre" name="name" type="text" placeholder="Tu nombre*" required/>
+        </div>
+        <Textarea error={errors.message} name="message" required minlength="20"/>
+
+        <Button type="submit">Enviar</Button>
+    </form>
+</section>

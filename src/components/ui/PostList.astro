@@ -1,0 +1,19 @@
+---
+import PostCard from "./PostCard.astro";
+
+import { getCollection } from 'astro:content'
+
+const category = Astro.url.searchParams.get('c');
+
+const posts = await getCollection('posts', category ? ({data}) => data.categories?.includes(category) : undefined)
+---
+
+<ul class="flex flex-col gap-4  w-full lg:w-3/4">
+    {
+        posts.map((post) => (
+            <li class="w-full">
+                <PostCard {...post}/>    
+            </li>
+        ))
+    }
+</ul>

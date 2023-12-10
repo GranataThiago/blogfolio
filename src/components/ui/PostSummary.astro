@@ -1,0 +1,11 @@
+---
+import TaggedContainer from "./TaggedContainer.astro";
+const { summary } = Astro.props;
+---
+
+
+<TaggedContainer tag="TL;DR;" class="bg-text my-4 p-4 text-background w-full max-w-[800px]">
+    <p>
+        {summary}
+    </p>
+</TaggedContainer>

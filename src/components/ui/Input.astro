@@ -1,0 +1,17 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+export interface InputProps extends HTMLAttributes<'input'>{
+    label: string;
+    error: string;
+}
+
+
+const { class: className, ...props } = Astro.props;
+---
+
+<label for={props.name} class="w-full">
+    <p class="sr-only">{props.label}</p>
+    <input {...props} class:list={[className, 'w-full border border-b-4 border-r-4 border-text text-text p-2 rounded-2xl']} type="text" >
+    { props.error && <p class="text-red-600">{props.error}</p> }
+</label>

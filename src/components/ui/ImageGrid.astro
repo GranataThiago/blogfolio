@@ -1,0 +1,17 @@
+---
+import { Image } from "astro:assets";
+import TaggedContainer from "./TaggedContainer.astro";
+
+const { images, tag } = Astro.props;
+---
+
+
+<TaggedContainer tag={tag} right class="grid grid-cols-2 gap-2 bg-text p-2">
+    {
+        images.map((img: any) => (
+            <div class="relative aspect-[3/2]">
+                <Image class="m-0 object-cover" src={img.url} width={600} height={600 / 1.5} alt={img.alt}/>
+            </div>
+        ))
+    }
+</TaggedContainer>

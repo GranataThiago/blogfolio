@@ -1,0 +1,16 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Textarea extends HTMLAttributes<'input'>{
+    label: string;
+    error: string;
+}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<label class="w-full">
+    <p class="sr-only">Tu mensaje</p>
+    <textarea {...props} placeholder="Escribí tu mensaje..." class="border border-b-4 border-r-4 border-text text-text p-2 rounded-2xl w-full" id="" cols="30" rows="10"></textarea>
+    { props.error && <p>{props.error}</p> }
+</label>

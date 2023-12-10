@@ -1,0 +1,90 @@
+---
+title: Cómo desarrollé mi blog
+author: Thiago Granata
+date: 2023-11-23
+image: ../images/mi-blog.webp
+summary: Renové mi sitio web para darle más personalidad y aprovechar nuevas tecnologías. Usé Astro 3.5 para potenciar la experiencia de desarrollo, integré MDX para contenido dinámico y exploré caracteristicas nuevas como Content Collections y View Transitions. 
+relatedPosts: []
+categories: [personal]
+---
+import ImageGrid from '../../components/ui/ImageGrid.astro'
+import Carrousel from '../../components/ui/Carrousel.svelte'
+import TodoList from '../../components/ui/TodoList.astro'
+
+La semana pasada finalmente inicié la renovación de mi sitio web. Para tener un contexto más amplio, así era antes:
+<ImageGrid tag='Mi antiguo blog' images={[
+    {url: 'https://res.cloudinary.com/dcb31ckjr/image/upload/v1701099708/como-desarrolle-mi-blog/WhatsApp-Image-2023-11-27-at-12.38.25_westnr.webp', alt: 'Hero Section' },
+    {url: 'https://res.cloudinary.com/dcb31ckjr/image/upload/v1701099706/como-desarrolle-mi-blog/WhatsApp-Image-2023-11-27-at-12.38.36_efcjzp.webp', alt: 'About Section' },
+    {url: 'https://res.cloudinary.com/dcb31ckjr/image/upload/v1701099704/como-desarrolle-mi-blog/WhatsApp-Image-2023-11-27-at-12.38.49_p0bavk.webp', alt: 'Projects Section' },
+    {url: 'https://res.cloudinary.com/dcb31ckjr/image/upload/v1701099705/como-desarrolle-mi-blog/WhatsApp-Image-2023-11-27-at-12.38.58_hlbctz.webp', alt: 'Blog Section'},
+
+]}/>
+
+Aunque no me disgustaba, sentía que carecía de personalidad. Buscaba algo más distintivo y sólido para forjar una marca personal. Desde un punto de vista técnico, estaba bastante desactualizado. A día de hoy (24/11/2023), __Astro__, el framework utilizado en este sitio, está en su versión 3.5, mientras que en mi blog anterior usaba la versión 0.7, lo que significaba perder la capacidad de aprovechar varias de las nuevas e interesantes características.
+
+## Branding
+
+Primero que nada empecé por establecer las bases de mi nueva identidad visual. Para ello comence a iterar sobre paletas de colores utilizando un layout básico en [Figma](https://www.figma.com/)
+
+<Carrousel client:visible/>
+
+Finalmente, elegí una paleta de colores similar a la que tiene mi Terminal en [VSCode](https://code.visualstudio.com/) (imagen 1)
+
+__Aclaración__: Mientras codeaba la parte visual de los posts, me dí cuenta que la fuente que pensaba utilizar para los títulos (Space Mono) no quedaba tan bien. Así que la Poppins es la fuente que voy a utilizar tanto para títulos como párrafos.
+
+## Stack
+
+Habia una sola cosa de la que estaba seguro cuando pensé en qué tecnologias usar: **Astro** tenia que ser una de ellas. Cuando lo probé por primera vez habia quedado encantado con lo agradable que era la experiencia al desarrollar con él, así que sí o sí queria seguir utilizandolo. 
+
+Obviamente, tambien necesitaba una herramienta que me ayude a escribir los posts. Consideré dos opciones: un _Rich Text Editor_ o _Markdown_. Sin embargo, me parecia que [Markdown](https://es.wikipedia.org/wiki/Markdown) era la solución más simple y efectiva.
+
+#### MDX
+
+Markdown por sí solo es bueno, pero si queremos agregarle un condimento extra a los posts podemos usar [__MDX__](https://mdxjs.com/) que nos va a permitir renderizar componentes utilizando Markdown, como la grilla de imagenes al inicio del post. Hoy en día, hay varias alternativas para utilizar MDX, pero simplifiqué las cosas utilizando la integración que tiene Astro [(`@astrojs/mdx`)](https://docs.astro.build/en/guides/integrations-guide/mdx/)
+
+#### NestJS y MongoDB
+
+¿Por qué Nest y MongoDB?
+Aunque aún no esté implementado al momento de escribir este post, elegí usar Nest y Mongo para tener un backend que permita autenticar usuarios y que estos puedan
+interactuar con los artículos (likes, comentarios, etc.)
+
+Además, es una forma de tener un backend preparado por si en el futuro se me ocurren más cosas que lo requieran.
+
+#### Interactividad
+
+Para agregar interactividad podemos hacer uso del concepto de [Islands](https://docs.astro.build/en/concepts/islands/).
+En resumen, las __Islands__ son componentes de la interfaz de nuestro sitio web que son interactivos.
+Lo interesante es que podemos crear estos componentes utilizando cualquier framework de UI de las [integraciones de Astro](https://docs.astro.build/en/guides/integrations-guide/), como React, Preact, Solid, Vue, Svelte, Lit y Alpinejs.
+
+De esa lista, Svelte me llamó particularmente la atención después de haber escuchado esta [charla](https://youtu.be/3NGpNQBtuqc?t=445) de Fernando Herrera y midudev. En ella comentaban sobre lo sencillo que era escribir en Svelte en comparación con otros frameworks [(ver comparación)](https://component-party.dev/). Aunque Svelte tenga cierta magia detrás, estaba muy interesado en probarlo, así que fue mi elección para esta web.
+
+## Manos a la obra 🔨
+
+Con la identidad visual definida y el stack elegido, era momento de ponerse a trabajar. El diseño no es mi punto más fuerte, así que traté de mantenerlo lo más simple (pero interesante) posible.
+Después de explorar opciones en Figma, logré un diseño inicial que, aunque requería más trabajo, me convencía lo suficiente para comenzar.
+
+A nivel técnico, opté comenzar un proyecto desde cero en lugar de actualizar todas las dependencias del proyecto anterior. Actualizarlas consumiria más tiempo y no resultaria conveniente.
+Por lo tanto, creé un nuevo proyecto de Astro:
+
+```
+$: yarn create astro
+```
+
+Instalé las dependencias necesarias para el proyecto:
+
+```
+$: yarn astro add tailwind
+$: yarn astro add mdx
+$: yarn astro add svelte
+```
+
+Y con eso ya estaba todo listo para ponerme a programar.
+Mientras programaba el blog aprendí e implementé varias de las "nuevas" caracteristicas de Astro como las [Content Collections](https://docs.astro.build/en/guides/content-collections/) y [View Transitions](https://docs.astro.build/en/guides/view-transitions/).
+Peeero, me guardo entrar en detalle en esos temas para un articulo dedicado especialmente a Astro que va a salir más adelante
+
+
+## Pasos siguientes
+
+Aunque estoy contento con el resultado del blog, aún quedan varias cosas por hacer, así que acá dejo una lista de ellas:
+
+<TodoList tasks={[ { name: 'Accesibilidad', completed: false }, { name: 'Rendimiento', completed: false }, { name: 'SEO', completed: false }, { name: 'Backend', completed: false } ]}/>
