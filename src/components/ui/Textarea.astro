@@ -10,7 +10,7 @@ const { error, class: className, ...props } = Astro.props;
 ---
 
 <label for="message" class="w-full">
-    <p class="sr-only">Tu mensaje</p>
+    <span class="sr-only">Tu mensaje</span>
     <textarea {...props} placeholder="Escribí tu mensaje..." class="border border-b-4 border-r-4 border-text text-text p-2 rounded-2xl w-full" id="message" cols="30" rows="10"></textarea>
     { error && <p>{error}</p> }
 </label>
