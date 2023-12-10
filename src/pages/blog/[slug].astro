@@ -4,7 +4,6 @@ import Layout from '../../layouts/Layout.astro';
 import PostSummary from "../../components/ui/PostSummary.astro";
 import RelatedPosts from "../../components/ui/RelatedPosts.astro";
 
-type Props = { post: CollectionEntry<'posts'>[] }
 
 export async function getStaticPaths () {
   const posts = await getCollection('posts');

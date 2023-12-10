@@ -6,7 +6,7 @@ import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
 	title: string;
-	description: string;
+	description?: string;
 	imageUrl?: ImageMetadata;
 }
 
@@ -30,7 +30,7 @@ const url = Astro.url;
 
 		<!-- Facebook -->
 		<meta property="og:title" content={title}>
-		<meta property="og:description" content={description}>
+		<meta property="og:description" content={description || 'Thiago Michay'}>
 		<meta property="og:type" content="website">
 		<meta property="og:image" content={imageUrl?.src}>
 		<meta property="og:url" content={url}>
@@ -39,7 +39,7 @@ const url = Astro.url;
 		<meta name="twitter:creator" content="@tmgranata">
 		<meta name="twitter:card" content="summary">
 		<meta name="twitter:title" content={title}>
-		<meta name="twitter:description" content={description}>
+		<meta name="twitter:description" content={description || 'Thiago Michay'}>
 		<meta name="twitter:image" content={imageUrl?.src}>
 		<meta name="twitter:url" content={url}>
 		<ViewTransitions />
