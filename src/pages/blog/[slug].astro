@@ -1,31 +1,10 @@
 ---
-import type { GetStaticPaths } from "astro";
-import type { Post } from '../../interfaces/Post'
 import { getCollection, type CollectionEntry } from 'astro:content'
 import Layout from '../../layouts/Layout.astro';
 import PostSummary from "../../components/ui/PostSummary.astro";
-import PostCard from "../../components/ui/PostCard.astro";
 import RelatedPosts from "../../components/ui/RelatedPosts.astro";
-import PostVideo from "../../components/ui/PostVideo.astro";
 
-// export async function getStaticPaths() {
-//   const response = await fetch('http://localhost:3000/posts', {
-//     method: 'GET',
-//   });
-//   const posts = await response.json();
-
-//   const params = posts.flatMap((post: Post) => ({
-//     params: {
-//       slug: post.slug,
-//     },
-//     props: {
-//       ...post
-//     }
-//   }))
-//   return [
-//     ...params
-//   ];
-// }
+type Props = { post: CollectionEntry<'posts'>[] }
 
 export async function getStaticPaths () {
   const posts = await getCollection('posts');
@@ -41,7 +20,6 @@ export async function getStaticPaths () {
   return paths;
 };
 
-type Props = { post: CollectionEntry<'posts'>[] }
 
 const { slug } = Astro.params;
 const { post } = Astro.props;
@@ -61,7 +39,18 @@ const { Content } = await post.render();
           <div class="prose prose-xl overflow-visible mb-20 relative">
             <Content />
           </div>
-        </article>
+          <hr >
+          <section class="mt-4 mb-8">
+            <h3>Categorias</h3>
+            <ul class="flex gap-2 flex-wrap">
+              {
+                post.data.categories.map(category => (
+                  <li class="bg-slate-100 p-2">{category}</li>
+                ))
+              }
+            </ul>
+          </div>
+        </section>
         <aside class="basis-2/6">
           <PostSummary summary={post.data.summary} />
           { post.data?.relatedPosts?.length > 0 ? <RelatedPosts relatedPosts={post.data.relatedPosts}/> : null }

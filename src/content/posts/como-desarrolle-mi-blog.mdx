@@ -5,7 +5,7 @@ date: 2023-11-23
 image: ../images/mi-blog.webp
 summary: Renové mi sitio web para darle más personalidad y aprovechar nuevas tecnologías. Usé Astro 3.5 para potenciar la experiencia de desarrollo, integré MDX para contenido dinámico y exploré caracteristicas nuevas como Content Collections y View Transitions. 
 relatedPosts: []
-categories: [personal]
+categories: [personal, programacion]
 ---
 import ImageGrid from '../../components/ui/ImageGrid.astro'
 import Carrousel from '../../components/ui/Carrousel.svelte'
@@ -78,7 +78,21 @@ $: yarn astro add mdx
 $: yarn astro add svelte
 ```
 
-Y con eso ya estaba todo listo para ponerme a programar.
+Y con eso ya estaba todo listo para ponerme a programar y por suerte, Astro hace todo muy fácil, con una simple estructura de carpetas como esta:
+
+```
+-- src
+|   -- components
+|   -- content
+|   -- layouts
+|   -- pages
+
+```
+
+Logré manejar prácticamente todo el sitio.
+`pages` se encarga de definir las rutas utilizando [file-based routing](https://docs.astro.build/en/core-concepts/routing/#_top), en `content` se configura y almacena el contenido de los artículos (los archivos mdx), `layouts` guarda esas estructuras que queremos reutilizar en diferentes páginas y `components`
+es donde voy creando todos los componentes que necesito especialmente para este sitio (sean o no reactivos)
+
 Mientras programaba el blog aprendí e implementé varias de las "nuevas" caracteristicas de Astro como las [Content Collections](https://docs.astro.build/en/guides/content-collections/) y [View Transitions](https://docs.astro.build/en/guides/view-transitions/).
 Peeero, me guardo entrar en detalle en esos temas para un articulo dedicado especialmente a Astro que va a salir más adelante
 
