@@ -43,7 +43,7 @@ const { Content } = await post.render();
             <h3>Categorias</h3>
             <ul class="flex gap-2 flex-wrap">
               {
-                post.data.categories.map(category => (
+                post.data?.categories?.map(category => (
                   <li class="bg-slate-100 p-2">{category}</li>
                 ))
               }
