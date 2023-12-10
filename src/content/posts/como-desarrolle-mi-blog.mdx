@@ -94,7 +94,17 @@ Logré manejar prácticamente todo el sitio.
 es donde voy creando todos los componentes que necesito especialmente para este sitio (sean o no reactivos)
 
 Mientras programaba el blog aprendí e implementé varias de las "nuevas" caracteristicas de Astro como las [Content Collections](https://docs.astro.build/en/guides/content-collections/) y [View Transitions](https://docs.astro.build/en/guides/view-transitions/).
-Peeero, me guardo entrar en detalle en esos temas para un articulo dedicado especialmente a Astro que va a salir más adelante
+Peeero, me guardo entrar en detalle en esos temas para un articulo dedicado especialmente a Astro que va a salir más adelante.
+
+Cuando estaba deployando el blog con [Vercel](https://vercel.com/) obtuve este error:
+
+```
+NoAdapterInstalled: Cannot use `output: 'server'` or `output: 'hybrid'` without an adapter. Please install and configure the appropriate server adapter for your final deployment.
+```
+
+Y es que si queria usar Server Side Rendering, necesitaba un `adapter` para que al hacer el build del proyecto esté preparado para Vercel. Por suerte, Astro _tambien tiene_ una integración para hacer esto, [Astro Vercel](https://docs.astro.build/en/guides/integrations-guide/vercel/#_top).
+Así que fue tan fácil como ejecutar en la terminal `yarn astro add vercel` y volver a deployar el proyecto para que todo funcione correctamente.
+
 
 
 ## Pasos siguientes
