@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import PlaceholderImage from '../../assets/images.jpg'
-import Button from "./Button.astro";
+import Link from "./Link.astro";
 
 
 const post = Astro.props;
@@ -14,10 +14,8 @@ const post = Astro.props;
             <p class="text-2xl font-mono font-bold">{post.data?.title || 'Test Title'}</p>
         </header>
         <p class="line-clamp-3">{post.data.summary || 'Lorem Ipsums'}</p>
-        <Button class="mt-auto ml-auto w-32">
-            <a href={`/blog/${post.slug}`}>
-                Leer
-            </a>
-        </Button>
+        <Link class="text-center mt-auto ml-auto w-32" href={`/blog/${post.slug}`}>
+            Leer
+        </Link>
     </div>
 </article>

@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Button from '../ui/Button.astro';
 import Logo from '../../assets/tmgranata.svg'
 import DropdownNav from '../ui/DropdownNav.svelte';
+import Link from '../ui/Link.astro';
 ---
 
 <header class="flex justify-between items-center container !my-0 !px-0 !py-4 mx-auto bg-background">
@@ -11,9 +12,7 @@ import DropdownNav from '../ui/DropdownNav.svelte';
     </a>        
     
     <DropdownNav client:load/>
-    <Button class="z-10">
-        <a href="/blog">
-            Blog
-        </a>
-    </Button>
+    <Link class="z-10" href="/blog">
+        Blog
+    </Link>
 </header>
