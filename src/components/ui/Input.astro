@@ -11,7 +11,7 @@ const { label, error, class: className, ...props } = Astro.props;
 ---
 
 <label for={props.name} class="w-full">
-    <p class="sr-only">{label}</p>
-    <input id={props.name} {...props} class:list={[className, 'w-full border border-b-4 border-r-4 border-text text-text p-2 rounded-2xl']} type="text" >
+    <span class="sr-only">{label}</span>
+    <input id={props.name} {...props} class:list={[className, 'w-full border border-b-4 border-r-4 border-text text-text p-2 rounded-2xl']}>
     { error && <p class="text-red-600">{error}</p> }
 </label>
