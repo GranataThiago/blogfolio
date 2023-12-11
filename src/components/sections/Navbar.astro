@@ -7,12 +7,12 @@ import Link from '../ui/Link.astro';
 ---
 
 <header class="flex justify-between items-center container !my-0 !px-0 !py-4 mx-auto bg-background">
-    <a href="/" class="z-10">
+    <a href="/" class="z-20">
         <Image src={Logo} alt="Thiago Granata Logo" width={64} height={64}>
     </a>        
     
     <DropdownNav client:load/>
-    <Link class="z-10" href="/blog">
+    <Link class="z-20" href="/blog">
         Blog
     </Link>
 </header>

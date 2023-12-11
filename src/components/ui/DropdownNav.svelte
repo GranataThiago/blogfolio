@@ -44,13 +44,13 @@
 
 <svelte:window on:resize={handleResize} />
 <nav class="mt-auto mb-auto md:visible">
-    <button class="relative z-10"  hidden={!showResponsiveMenu} on:click={toggleNav} aria-expanded={isOpen} aria-label={ariaLabel}>
+    <button class="relative z-20"  hidden={!showResponsiveMenu} on:click={toggleNav} aria-expanded={isOpen} aria-label={ariaLabel}>
         <span class="block w-8 h-1 mb-2 bg-text"></span>
         <span class="block w-8 h-1 mb-2 bg-text"></span>
         <span class="block w-8 h-1 mb-2 bg-text"></span>
     </button>
         {#if isOpen}
-            <ul transition:fly={{ y: -200, duration: 400 }} class="flex items-center gap-8 font-mono font-bold flex-col absolute pt-20 z-0 top-0 left-0  bg-background w-full h-full">
+            <ul transition:fly={{ y: -200, duration: 400 }} class="flex items-center gap-8 font-mono font-bold flex-col absolute pt-20 z-10 top-0 left-0  bg-background w-full h-full">
                 {#each links as link}
                     <li>
                         <a on:click={toggleNav} href={link.href}>{link.displayName}</a> 
