@@ -4,6 +4,9 @@ import PostList from "../components/ui/PostList.astro";
 import Tag from "../components/ui/Tag.astro";
 import Layout from "../layouts/Layout.astro";
 import BlogImage from '../content/images/blog.png'
+export const prerender = false;
+
+const category = Astro.url.searchParams.get('c');
 
 const categories = [
     {
@@ -35,7 +38,7 @@ const categories = [
     <main class="container !p-0 !mt-4">
         <Input class="mb-4" placeholder="Buscar..."></Input>
         <section class="articles flex gap-8 flex-col-reverse lg:flex-row">
-            <PostList />
+            <PostList category={category}/>
             <aside class="font-mono text-text basis-1/4">
                 <p class="text-3xl mb-2">Categorias</p>
                 <ul class="flex gap-4 flex-wrap">
