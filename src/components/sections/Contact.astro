@@ -4,6 +4,7 @@ import Input from "../ui/Input.astro";
 import Textarea from "../ui/Textarea.astro";
 import Button from '../ui/Button.astro'
 import Icon from 'astro-icon'
+import { Resend } from 'resend';
 
 
 const errors = { name: '', email: '', message: '' };
@@ -22,6 +23,15 @@ if (Astro.request.method === "POST") {
     if (typeof message !== "string") {
       errors.email += "Oops, falta el mensaje!";
     } 
+
+    const resend = new Resend(import.meta.env.RESEND_API_KEY);
+
+    resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: 'michaygr@gmail.com',
+      subject: `Recibiste un mensaje de ${name}`,
+      html: `${message!.toString()} <br/> sent by ${email}`
+    });
 
   } catch (error) {
     if (error instanceof Error) {
