@@ -9,7 +9,7 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), mdx(), svelte(), sitemap()],
-  output: 'hybrid',
+  output: 'server',
   adapter: vercel(),
   site: 'https://tmgranata.com'
 });
