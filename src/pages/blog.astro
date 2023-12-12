@@ -1,9 +1,13 @@
 ---
+export const prerender = false;
+
 import Input from "../components/ui/Input.astro";
 import PostList from "../components/ui/PostList.astro";
 import Tag from "../components/ui/Tag.astro";
 import Layout from "../layouts/Layout.astro";
 import BlogImage from '../content/images/blog.png'
+
+
 
 const category = Astro.url.searchParams.get('c');
 
