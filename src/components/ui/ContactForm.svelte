@@ -4,7 +4,7 @@
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         try{
-            const response = await fetch('/api/sendEmail.json', {
+            const response = await fetch('/api/sendEmail', {
                 method: 'POST',
                 body: formData,
             })
