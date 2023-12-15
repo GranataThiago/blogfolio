@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "./Layout.astro";
+import BlogImage from '../content/images/blog.png'
+import Tag from "../components/ui/Tag.astro";
+
+const allPosts = await getCollection('posts');
+const categories = [...new Set(allPosts.map((post) => post.data.categories).flat())];
+
+---
+
+<Layout title="Thiago Granata | Blog" description="Explorá mis últimos artículos y pensamientos. Desde tips de programación a innovaciones técnicas." imageUrl={BlogImage}>
+    <main class="container !p-0 !mt-4">
+        <section class="articles flex gap-8 flex-col-reverse lg:flex-row">
+            <slot />
+            <aside class="font-mono text-text basis-1/4">
+                <p class="text-3xl mb-2">Categorias</p>
+                <ul class="flex gap-4 flex-wrap">
+                    {
+                        categories?.map(category => (
+                            <li>
+                                <a href={`/categories/${category}`}>
+                                    <Tag>{category?.toUpperCase()}</Tag>   
+                                </a>    
+                            </li>
+                        ))
+                    }
+                    <li>
+                        <a href={`/blog`}>
+                            <Tag>Limpiar filtros</Tag>   
+                        </a>    
+                    </li>
+                </ul>
+            </aside>
+        </section>
+
+    </main>
+
+</Layout>

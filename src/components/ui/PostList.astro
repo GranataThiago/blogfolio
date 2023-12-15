@@ -1,11 +1,13 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import PostCard from "./PostCard.astro";
 
-import { getCollection } from 'astro:content'
+export interface Props{
+    posts: CollectionEntry<'posts'>[]
+}
 
-const { category = null } = Astro.props;
+const { posts } = Astro.props;
 
-const posts = await getCollection('posts', category ? ({data}) => data.categories?.includes(category) : undefined)
 ---
 
 <ul class="flex flex-col gap-4  w-full lg:w-3/4">

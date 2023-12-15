@@ -1,44 +1,11 @@
 ---
-import { isValidEmail } from '../../utils/validators'
 import Input from "../ui/Input.astro";
 import Textarea from "../ui/Textarea.astro";
 import Button from '../ui/Button.astro'
 import Icon from 'astro-icon'
-import { Resend } from 'resend';
+import ContactForm from '../ui/ContactForm.svelte'
 
 
-const errors = { name: '', email: '', message: '' };
-if (Astro.request.method === "POST") {
-  try {
-    const data = await Astro.request.formData();
-    const name = data.get('name');
-    const email = data.get('email');
-    const message = data.get('message');
-    if (typeof name !== "string" || name.length < 1) {
-      errors.name += "Oops, falta tu nombre!";
-    }
-    if (typeof email !== "string" || !isValidEmail(email)) {
-      errors.email += "El email no es válido";
-    } 
-    if (typeof message !== "string") {
-      errors.email += "Oops, falta el mensaje!";
-    } 
-
-    const resend = new Resend(import.meta.env.RESEND_API_KEY);
-
-    resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: 'michaygr@gmail.com',
-      subject: `Recibiste un mensaje de ${name}`,
-      html: `${message!.toString()} <br/> sent by ${email}`
-    });
-
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message);
-    }
-  }
-}
 ---
 
 
@@ -68,7 +35,7 @@ if (Astro.request.method === "POST") {
         </div>
     </div>
 
-    <form method="POST" class="flex-grow flex flex-col gap-4">
+    <!-- <form method="POST" class="flex-grow flex flex-col gap-4">
         <div class="flex gap-4">
             <Input error={errors.email} label="Email" name="email" type="email" placeholder="Email de contacto*" required/>
             <Input error={errors.name} label="Nombre" name="name" type="text" placeholder="Tu nombre*" required/>
@@ -76,5 +43,10 @@ if (Astro.request.method === "POST") {
         <Textarea error={errors.message} name="message" required minlength="20"/>
 
         <Button type="submit">Enviar</Button>
-    </form>
+    </form> -->
+    <ContactForm client:load>
+        <Input slot="email" label="Email" name="email" type="email" placeholder="Email de contacto*" required/>
+        <Input slot="name" label="Nombre" name="name" type="text" placeholder="Tu nombre*" required/>
+        <Textarea slot="message" name="message" required minlength="20"/>
+    </ContactForm>
 </section>
