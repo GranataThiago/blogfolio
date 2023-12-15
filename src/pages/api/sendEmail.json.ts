@@ -5,6 +5,8 @@ import { Resend } from "resend";
 export const POST: APIRoute = async({ params, request }) => {
     
   try {
+    console.log('Got here')
+
     const data = await request.formData();
     const name = data.get('name');
     const email = data.get('email');
@@ -41,12 +43,15 @@ export const POST: APIRoute = async({ params, request }) => {
         )
     }
     
+
+
     return new Response(
         JSON.stringify({ message: 'Tu mensaje se envió con éxito' }),
         { status: 200 }
     )
 
   } catch (error) {
+    console.log(error)
     return new Response(
         JSON.stringify({message: 'Error Desconocido'}),
         { status: 500 }
