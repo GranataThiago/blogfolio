@@ -2,13 +2,18 @@
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        const formData = new FormData(e.currentTarget)
-        const response = await fetch('/api/sendEmail.json', {
-            method: 'POST',
-            body: formData,
-        })
-        const data = await response.json();
-        console.log(data)
+        const formData = new FormData(e.currentTarget);
+        try{
+            const response = await fetch('/api/sendEmail.json', {
+                method: 'POST',
+                body: formData,
+            })
+            const data = await response.json();
+            console.log(data)
+        }catch(err){
+            console.log(err)
+        }
+
     }
 
 
