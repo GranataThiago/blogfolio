@@ -3,9 +3,26 @@ import Input from "../ui/Input.astro";
 import Textarea from "../ui/Textarea.astro";
 import Button from '../ui/Button.astro'
 import Icon from 'astro-icon'
-import ContactForm from '../ui/ContactForm.svelte'
+import { Resend } from "resend";
 
+if(Astro.request.method === 'POST'){
+    console.log('Submitted Form')
+    const form = await Astro.request.formData();
+    const name = form.get('name');
+    const email = form.get('email');
+    const message = form.get('message');
 
+    const resend = new Resend(import.meta.env.RESEND_API_KEY);
+
+    const response = await resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: 'michaygr@gmail.com',
+      subject: `Recibiste un mensaje de ${name}`,
+      html: `${message!.toString()} <br/> sent by ${email}`
+    });
+
+    console.log(response)
+}
 ---
 
 
@@ -35,18 +52,18 @@ import ContactForm from '../ui/ContactForm.svelte'
         </div>
     </div>
 
-    <!-- <form method="POST" class="flex-grow flex flex-col gap-4">
+    <form method="POST" class="flex-grow flex flex-col gap-4">
         <div class="flex gap-4">
-            <Input error={errors.email} label="Email" name="email" type="email" placeholder="Email de contacto*" required/>
-            <Input error={errors.name} label="Nombre" name="name" type="text" placeholder="Tu nombre*" required/>
+            <Input label="Email" name="email" type="email" placeholder="Email de contacto*" required/>
+            <Input label="Nombre" name="name" type="text" placeholder="Tu nombre*" required/>
         </div>
-        <Textarea error={errors.message} name="message" required minlength="20"/>
+        <Textarea name="message" required minlength="20"/>
 
         <Button type="submit">Enviar</Button>
-    </form> -->
-    <ContactForm client:load>
+    </form>
+    <!-- <ContactForm client:load>
         <Input slot="email" label="Email" name="email" type="email" placeholder="Email de contacto*" required/>
         <Input slot="name" label="Nombre" name="name" type="text" placeholder="Tu nombre*" required/>
         <Textarea slot="message" name="message" required minlength="20"/>
-    </ContactForm>
+    </ContactForm> -->
 </section>
