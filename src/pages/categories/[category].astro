@@ -3,24 +3,17 @@ import ListLayout from "../../layouts/ListLayout.astro";
 import { getCollection } from "astro:content";
 import PostList from "../../components/ui/PostList.astro";
 
-export async function getStaticPaths() {
-    const allPosts = await getCollection('posts');
-    const categories = [...new Set(allPosts.map((post) => post.data.categories).flat())];
-
-    return categories.map((cat) => {
-        const filteredPosts = allPosts.filter((post) =>
-            post.data?.categories?.includes(cat!)
-        );
-        return {
-        params: { category: cat },
-        props: { posts: filteredPosts },
-        };
-  });
+const { category } = Astro.params;
+if (category === undefined) {
+  throw new Error("Slug is required");
 }
 
+const posts = await getCollection("posts", ({ data }) => data.categories?.includes(category));
 
-const { category } = Astro.params;
-const { posts } = Astro.props;
+if (posts === undefined) {
+  return Astro.redirect("/404");
+}
+
 ---
 
 
