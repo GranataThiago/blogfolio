@@ -1,27 +1,21 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content'
+import { getCollection, type CollectionEntry, getEntry } from 'astro:content'
 import Layout from '../../layouts/Layout.astro';
 import PostSummary from "../../components/ui/PostSummary.astro";
 import RelatedPosts from "../../components/ui/RelatedPosts.astro";
 
 
-export async function getStaticPaths () {
-  const posts = await getCollection('posts');
-
-  const paths = posts.map(post => ({
-    params: {
-      slug: post.slug
-    },
-    props: {
-      post
-    }
-  }))
-  return paths;
-};
-
-
 const { slug } = Astro.params;
-const { post } = Astro.props;
+if (slug === undefined) {
+  throw new Error("Slug is required");
+}
+
+const post = await getEntry("posts", slug);
+
+if (post === undefined) {
+  return Astro.redirect("/404");
+}
+
 const { Content } = await post.render();
 ---
 <Layout title={post.data.title} description={post.data.summary} imageUrl={post.data.image}>
