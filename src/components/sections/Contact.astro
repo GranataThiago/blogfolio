@@ -6,24 +6,24 @@ import Icon from 'astro-icon'
 import ContactForm from '../ui/ContactForm.svelte'
 import { Resend } from "resend";
 
-if(Astro.request.method === 'POST'){
-    console.log('Submitted Form')
-    const form = await Astro.request.formData();
-    const name = form.get('name');
-    const email = form.get('email');
-    const message = form.get('message');
+// if(Astro.request.method === 'POST'){
+//     console.log('Submitted Form')
+//     const form = await Astro.request.formData();
+//     const name = form.get('name');
+//     const email = form.get('email');
+//     const message = form.get('message');
 
-    const resend = new Resend(import.meta.env.RESEND_API_KEY);
+//     const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
-    const response = await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: 'michaygr@gmail.com',
-      subject: `Recibiste un mensaje de ${name}`,
-      html: `${message!.toString()} <br/> sent by ${email}`
-    });
+//     const response = await resend.emails.send({
+//       from: 'onboarding@resend.dev',
+//       to: 'michaygr@gmail.com',
+//       subject: `Recibiste un mensaje de ${name}`,
+//       html: `${message!.toString()} <br/> sent by ${email}`
+//     });
 
-    console.log(response)
-}
+//     console.log(response)
+// }
 ---
 
 
