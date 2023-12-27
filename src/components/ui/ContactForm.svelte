@@ -2,6 +2,7 @@
 
     const handleSubmit = async(e) => {
         e.preventDefault();
+        console.log('Handle Submit')
         const formData = new FormData(e.currentTarget);
         try{
             const response = await fetch('/api/sendEmail', {
