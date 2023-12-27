@@ -5,7 +5,7 @@
         console.log('Handle Submit')
         const formData = new FormData(e.currentTarget);
         try{
-            const response = await fetch('/api/sendEmail', {
+            const response = await fetch('/api/sendEmail.json', {
                 method: 'POST',
                 body: formData,
             })
