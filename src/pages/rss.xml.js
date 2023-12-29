@@ -4,8 +4,8 @@ import { getCollection } from 'astro:content';
 export async function GET(context) {
   const posts = await getCollection("posts");
   return rss({
-    title: 'Thiago Granata | Blog',
-    description: 'Todas mis ideas en un lugar',
+    title: 'Thiago Granata | Blogfolio',
+    description: 'Programación, SEO, Accesibilidad.',
     site: context.site,
     items: posts.map((post) => ({
       title: post.data.title,
