@@ -7,7 +7,7 @@ import Link from "./Link.astro";
 const post = Astro.props;
 ---
 
-<article class="bg-text text-background flex w-full rounded-3xl h-auto flex-col md:flex-row md:h-52">
+<article class="bg-text text-background flex w-full rounded-3xl h-auto flex-col md:flex-row md:h-56">
     <Image class="p-2 object-cover aspect-video rounded-3xl mx-auto md:mx-0" width={400} height={224} src={post.data?.preview || PlaceholderImage} alt='Qué es la filosofia de la computación?' />
     <div class="detail p-4 flex flex-col flex-1">
         <header>
