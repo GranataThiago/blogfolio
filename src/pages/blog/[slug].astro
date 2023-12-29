@@ -6,7 +6,7 @@ import RelatedPosts from "../../components/ui/RelatedPosts.astro";
 
 
 export async function getStaticPaths () {
-  const posts = await getCollection('posts');
+  const posts = await getCollection('posts', ({data}) =>  import.meta.env.DEV || !data?.draft)
 
   const paths = posts.map(post => ({
     params: {
@@ -24,7 +24,7 @@ const { slug } = Astro.params;
 const { post } = Astro.props;
 const { Content } = await post.render();
 ---
-<Layout title={post.data.title} description={post.data.summary} imageUrl={post.data.image}>
+<Layout title={post.data.title} description={post.data.description} imageUrl={post.data.preview}>
     <main class="container !p-0 !m-auto flex gap-16 flex-col-reverse lg:flex-row">
         <article class="mx-auto basis-4/6">
           <header class="mb-8">
@@ -51,7 +51,7 @@ const { Content } = await post.render();
           </div>
         </section>
         <aside class="basis-2/6">
-          <PostSummary summary={post.data.summary} />
+          <PostSummary description={post.data.description} />
           { post.data?.relatedPosts?.length > 0 ? <RelatedPosts relatedPosts={post.data.relatedPosts}/> : null }
         </aside>
     </main>

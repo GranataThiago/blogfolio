@@ -6,7 +6,7 @@ import Tag from "../../components/ui/Tag.astro";
 import Layout from "../../layouts/Layout.astro";
 import ListLayout from "../../layouts/ListLayout.astro";
 
-const posts = await getCollection('posts')
+const posts = await getCollection('posts', ({data}) =>  import.meta.env.DEV || !data?.draft)
 
 ---
 

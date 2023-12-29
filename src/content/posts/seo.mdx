@@ -2,10 +2,20 @@
 title: ¿Qué es el SEO y cómo aprovecharlo?
 author: Thiago Granata
 date: 2023-12-31
-image: ../images/astro.webp
-summary: Que es el SEO y cómo aprovecharlo
-relatedPosts: [accesibilidad-web]
-categories: [seo]
+preview: ../../assets/astro.webp
+description: Que es el SEO, rastreo, indexación, sitemaps y como aprovecharlos como desarrolladores
+relatedPosts:
+    - accesibilidad-web
+categories:
+    - seo
+draft: true
+tags:
+    - accesibilidad
+    - seo
+    - astro
+    - google
+    - index
+    - sitemaps
 ---
 
 
@@ -38,4 +48,26 @@ Cuando un usuario hace una busqueda en Google, se busca en el índice páginas q
 
 # Conceptos básicos del SEO
 
-- sitemap
+Cómo desarrolladores, podemos ayudar a Google a que indexe nuestro contenido correctamente. La forma recomendada es creando un _sitemap_ para nuestro sitio, un sitemap es un archivo
+que proporciona información de nuestro sitio web (páginas, videos, etc). Los buscadores utilizan estos archivos para rastrear los sitios web de manera más eficiente.
+De todas formas, un sitemap no siempre es _obligatorio_ pero puede ser de gran ayuda en ciertos casos [(más información de sitemaps)](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview?hl=es).
+
+También es muy efectivo utilizar correctamente las etiquetas `<title>` y `<meta>`. En general hay algunas cosas a tener en cuenta cuando estamos utilizando estas etiquetas:
+
+- Elegir un titulo que describa con precisión el contenido de la página. El titulo debe ser breve pero descriptivo, que sea muy largo puede generar que Google termine mostrando
+solo una parte de él.
+- Titulos únicos para cada página. De esta forma ayudamos a diferenciar páginas de otras
+- Proveer un resumen preciso y único en la descripción de cada página `<meta name="description" content="(...)">`
+
+El uso del HTML semántico juega un rol importante para marcar una estructura jerárquica de nuestro contenido y si lo utilizamos de forma correcta vamos a mejorar la navegación por
+nuestro sitio. Por eso, tenemos que tener en consideración el uso apropiado de encabezados, enlaces, y secciones. 
+
+Para destacar, la optimización en general de nuestro sitio _también_ es importante para el SEO. Optimizar las imágenes y videos, la adaptabilidad y el contenido va a generar una experiencia
+mucho más agradable para nuestros usuarios y por ende para los buscadores.
+
+# Como apliqué esto
+
+Por suerte Astro hace algunas de las cosas muy sencillas gracias a las integraciones con las que cuenta
+Creé un sitemap utilizando `astro/sitemap`, agregué un rss `astro/rss`
+
+Después, verifiqué mi dominio en [Google Search Console](https://search.google.com/search-console) con el fin de poder utilizar las herramientas que nos provee. 

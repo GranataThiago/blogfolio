@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 
-const lastPost = (await getCollection('posts')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0]
+const lastPost = (await getCollection('posts', ({data}) =>  import.meta.env.DEV || !data?.draft)).sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0]
 
 ---
 
@@ -12,12 +12,12 @@ const lastPost = (await getCollection('posts')).sort((a, b) => b.data.date.getTi
         <p>→</p>
     </a>
 
-    <Image class="rounded-xl object-cover aspect-video mx-auto my-8 lg:m-8" src={lastPost.data.image} alt='' width={600} height={225}/>
+    <Image class="rounded-xl object-cover aspect-video mx-auto my-8 lg:m-8" src={lastPost.data.preview} alt='' width={600} height={225}/>
 
     <section class="place-self-center flex flex-col gap-0 items-center w-full lg:items-start lg:gap-4">
             <h2 class="text-background font-bold font-mono text-5xl lg:text-3xl text-center md:text-start">
                 {lastPost.data.title}
             </h2>
-            <p class="line-clamp-5 text-background text-lg font-medium w-3/4 mb-6 p-2 lg:p-0 lg:mb-0 lg:w-auto">{lastPost.data.summary}</p>
+            <p class="line-clamp-5 text-background text-lg font-medium w-3/4 mb-6 p-2 lg:p-0 lg:mb-0 lg:w-auto">{lastPost.data.description}</p>
     </section>
 </article>

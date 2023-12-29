@@ -2,7 +2,7 @@ import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 
 export async function GET(context) {
-  const posts = await getCollection("posts");
+  const posts = await getCollection('posts', ({data}) =>  import.meta.env.DEV || !data?.draft)
   return rss({
     title: 'Thiago Granata | Blogfolio',
     description: 'Programación, SEO, Accesibilidad.',

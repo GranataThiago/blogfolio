@@ -8,12 +8,12 @@ const post = Astro.props;
 ---
 
 <article class="bg-text text-background flex w-full rounded-3xl h-auto flex-col md:flex-row md:h-52">
-    <Image class="p-2 object-cover aspect-video rounded-3xl mx-auto md:mx-0" width={400} height={224} src={post.data?.image || PlaceholderImage} alt='Qué es la filosofia de la computación?' />
+    <Image class="p-2 object-cover aspect-video rounded-3xl mx-auto md:mx-0" width={400} height={224} src={post.data?.preview || PlaceholderImage} alt='Qué es la filosofia de la computación?' />
     <div class="detail p-4 flex flex-col flex-1">
         <header>
             <p class="text-2xl font-mono font-bold">{post.data?.title || 'Test Title'}</p>
         </header>
-        <p class="line-clamp-3">{post.data.summary || 'Lorem Ipsums'}</p>
+        <p class="line-clamp-3">{post.data.description || 'Lorem Ipsums'}</p>
         <Link class="text-center mt-auto ml-auto w-32" href={`/blog/${post.slug}`}>
             Leer
         </Link>
