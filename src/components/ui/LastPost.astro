@@ -11,10 +11,10 @@ const lastPost = (await getCollection('posts', ({data}) => import.meta.env.DEV |
         <p>→</p>
     </a>
 
-    <Image class="rounded-xl object-cover aspect-video mx-auto my-8 lg:m-8" src={lastPost.data.preview} alt='' width={600} height={225}/>
+    <Image class="rounded-xl object-cover aspect-video p-2 mx-auto my-8 lg:m-8 lg:p-0" src={lastPost.data.preview} alt={lastPost.data.title} width={600} height={225}/>
 
     <section class="place-self-center flex flex-col gap-0 items-center w-full lg:items-start lg:gap-4">
-            <h2 class="text-background font-bold font-mono text-5xl lg:text-3xl text-center md:text-start">
+            <h2 class="text-background font-bold font-mono text-3xl md:text-5xl lg:text-3xl text-center lg:text-start">
                 {lastPost.data.title}
             </h2>
             <p class="line-clamp-5 text-background text-lg font-medium w-3/4 mb-6 p-2 lg:p-0 lg:mb-0 lg:w-auto">{lastPost.data.description}</p>
