@@ -4,10 +4,12 @@
 
     export let selectedJob = 0;
     export let job = WORK_EXPERIENCE[0];
-    $: { job = WORK_EXPERIENCE[selectedJob] }
 
     function handleJobChanged(newJob) {
-        selectedJob = newJob;
+        if(newJob >= 0 && newJob < WORK_EXPERIENCE.length){
+            selectedJob = newJob;
+            job = WORK_EXPERIENCE[newJob];
+        }
 	}
 </script>
 
