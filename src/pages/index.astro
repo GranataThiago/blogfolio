@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/sections/Hero.astro';
 import About from '../components/sections/About.astro';
-import Experience from '../components/sections/Experience.astro';
+import Experience from '../components/sections/Experience.svelte';
 import Projects from '../components/sections/Projects.astro';
 import Contact from '../components/sections/Contact.astro';
 import Footer from '../components/sections/Footer.astro';
@@ -13,7 +13,7 @@ import Home from  '../assets/home.png'
 	<Hero />
 	<div class="flex gap-16 container !mb-0 flex-col lg:flex-row">
 		<About />
-		<Experience />
+		<Experience client:visible/>
 	</div>
 	<Projects />
 	<Contact />
