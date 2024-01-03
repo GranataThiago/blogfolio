@@ -25,7 +25,7 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 <Layout title={post.data.title} description={post.data.description} imageUrl={post.data.preview}>
-    <main class="container !p-0 !m-auto flex gap-16 flex-col-reverse lg:flex-row">
+    <main class="container !pt-0 !m-auto flex gap-16 flex-col-reverse lg:flex-row">
         <article class="mx-auto basis-4/6">
           <header class="mb-8">
             <h1 class="font-bold font-mono text-4xl">{post.data.title}</h1>
