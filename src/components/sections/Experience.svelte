@@ -34,12 +34,11 @@
         </div>
     </div>
 
-    <ul role="navigation" aria-label="Mis empleos" class="flex gap-4 w-full px-6 mx-auto mb-2">
+    <ul aria-label="Mis empleos" class="flex gap-4 w-full px-6 mx-auto mb-2">
         {#each WORK_EXPERIENCE as job, index}
             <li class={`h-4 flex-1 rounded-xl hover:scale-105 duration-75 ${index == selectedJob ? 'bg-accent' : 'bg-white'}`}>
                 <button tabindex="0" aria-label={`Empleo ${index + 1}`} class="w-full h-full" on:click={() => handleJobChanged(index)}></button>
             </li>
         {/each}
     </ul>
-
 </section>

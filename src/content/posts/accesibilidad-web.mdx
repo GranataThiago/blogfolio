@@ -1,15 +1,20 @@
 ---
 title: ¿Qué es la Accesibilidad Web?
 author: Thiago Granata
-date: 2023-12-11
+date: 2024-01-03T13:12:19.472Z
 preview: ../../assets/accesibilidad.webp
-description: La accesibilidad es el conjunto de caracteristicas que un sitio debe poseer para ser usable por la mayor cantidad de usuarios sin importar sus circunstancias. Como desarrolladores podemos diseñar sitios accesibles teniendo en cuenta las WCAG, y utilizando las herramientas que nos provee la especificación ARIA.
+description: Qué es la accesibilidad y cómo podemos desarrollar sitios accesibles para que sean usables por la mayor cantidad de usuarios sin importar sus circunstancias.
 relatedPosts:
     - como-desarrolle-mi-blog
 categories:
     - accesibilidad
 draft: true
 slug: accesibilidad-web
+tags:
+    - ARIA
+    - WCAG
+    - Accesibilidad
+    - a11y
 ---
 
 > Utilizando técnicas de diseño accesible logramos que un rango amplísimo de personas en situaciones dispares sea capaz de disfrutar de experiencias que van más allá
@@ -18,18 +23,18 @@ slug: accesibilidad-web
 > -- Accesibilidad Web, WCAG 2.1 de forma sencilla
 
 __Aclaración:__
-Este artículo es una reescritura de un post que existia en mi [antiguo blog](como-desarrolle-mi-blog), del cual no me gustaba el enfoque y decidí rehacerlo desde un punto de vista más didáctico con enfoques prácticos que aplique en esta web.
+Este artículo es una reescritura de un post que existia en mi [antiguo blog](como-desarrolle-mi-blog), del cual no me gustaba el enfoque y decidí rehacerlo desde un punto de vista más didáctico con enfoques prácticos que apliqué en esta web.
 
 ## ¿Qué significa que un sitio sea "accesible"?
 
 Siempre creí que denominar a un sitio web como "accesible" significaba que las personas con discapacidades tambien puedan disfrutar del contenido del mismo, 
 y sí bien es razón más que suficiente para comenzar a tomar un enfoque más accesible en el diseño de nuestras webs, la realidad es que trasciende eso.
 Hay un enfoque muy interesante en el libro de [Accesibilidad Web, WCAG 2.1 de forma sencilla](https://olgacarreras.blogspot.com/2018/11/libro-accesibilidad-web-wcag-21-de.html) que me hizo darme cuenta de esto: los problemas que pueden afectar
-a personas de forma _temporal_ o _permanente_, tambien __los podemos sufrir nosotros en situaciones cotidianas__. _Por ejemplo_: la dificultad de una persona tetrapléjica para apuntar con el cursor, son parecidas a las que tienen los ancianos.
+a personas de forma _temporal_ o _permanente_, tambien __los podemos sufrir nosotros en situaciones cotidianas__. _Por ejemplo_: la dificultad de una persona tetrapléjica para apuntar con el cursor, son parecidas a las que tienen las personas mayores.
 
 Entonces, __¿qué es la accesibilidad en un sitio web?__. _Para mí_ es crear webs con el objetivo de que sean __usables__ para la __mayor cantidad de personas posibles__, __sin importar__ en que __circunstancia__ se encuentren.
 
-Si todo esto no te pareció un motivo suficiente para interesarte por la accesibilidad, es esencial destacar que las __WCAG 2.0__ son __legalmente obligatorias__ en muchos países. El incumplimiento de estas pautas puede resultar en sanciones económicas en ciertas jurisdicciones.
+Si todo esto no te pareció un motivo suficiente para interesarte por la accesibilidad, es esencial destacar que las __WCAG 2.0__ son __legalmente obligatorias__ en muchos países. Incluso, el incumplimiento de estas pautas puede resultar en sanciones económicas en ciertas jurisdicciones.
 
 ## Pautas de Accesibilidad para el Contenido Web (WCAG)
 
@@ -56,8 +61,8 @@ Esto hace que los navegadores y las tecnologias de apoyo puedan reconocer estos 
 En la especificación se definen 3 caracteristicas principales:
 
 - [Roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles): definen que es o que función va a cumplir el elemento.
-- [Propiedades](https://www.w3.org/TR/wai-aria-1.1/#state_prop_def): le agregan propiedades a los elementos, que pueden ser utilizadas para añadirle un mejor significado o semantica.
-- [Estados](https://www.w3.org/TR/wai-aria-1.1/#state_prop_def): propiedades especiales que definen la condición actual de los elementos. Son diferentes de las propiedades ya que el estado puede cambiar a lo largo del ciclo de vida de nuestra app.
+- [Propiedades](https://www.w3.org/TR/wai-aria-1.1/#state_prop_def): nos permiten agregarle un mejor significado o semantica a los elementos.
+- [Estados](https://www.w3.org/TR/wai-aria-1.1/#state_prop_def): propiedades especiales que definen la condición actual de los elementos. Son diferentes de las propiedades ya que el estado puede cambiar a lo largo del ciclo de vida de nuestra app (ej. `aria-expanded`).
 
 Por ejemplo, una forma de aplicar esta especificación es la siguiente:
 
@@ -67,7 +72,9 @@ Por ejemplo, una forma de aplicar esta especificación es la siguiente:
 </div>
 ```
 
-Este ejemplo muestra como aplicar la especificación ARIA para que un `<div>` se comporte como un botón, utilizando el _role_ y el _tabindex_ para que nuestro elemento sea focusable. A pesar de ser una técnica válida, no es algo que querramos hacer.
+Este ejemplo muestra como aplicar la especificación ARIA para que un `<div>` se comporte como un `<button>`, utilizando el _role_ y el _tabindex_ para que nuestro elemento sea focusable. 
+
+A pesar de ser una técnica válida, no es algo que querramos hacer.
 Cuando sea viable, es más conveniente utilizar la etiqueta HTML correspondiente.
 
 ```html
@@ -129,6 +136,7 @@ Al narrar las tecnologias con las que trabaje se leía como "Lista de 5 elemento
 </ul>
 ```
 
+Despues de realizar algunas correcciones manuales, decidí realizar algunas pruebas automáticas con Lighthouse y Validator W3.
 
 ## Referencias
 - [W3](https://www.w3.org/WAI/) 
