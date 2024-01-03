@@ -1,9 +1,9 @@
 ---
 title: ¿Qué es la Accesibilidad Web?
 author: Thiago Granata
-date: 2024-01-03T13:12:19.472Z
+date: 2024-01-05T13:12:19.000Z
 preview: ../../assets/accesibilidad.webp
-description: Qué es la accesibilidad y cómo podemos desarrollar sitios accesibles para que sean usables por la mayor cantidad de usuarios sin importar sus circunstancias.
+description: Qué significa la accesibilidad web y qué son los estándares como WCAG 2.1 y WAI-ARIA. Por qué es importante crear sitios accesibles y cómo podemos aplicar los estándares y utilizar herramientas de evaluación para mejorar la implementación de la accesibilidad en nuestro sitio.
 relatedPosts:
     - como-desarrolle-mi-blog
 categories:
@@ -23,7 +23,7 @@ tags:
 > -- Accesibilidad Web, WCAG 2.1 de forma sencilla
 
 __Aclaración:__
-Este artículo es una reescritura de un post que existia en mi [antiguo blog](como-desarrolle-mi-blog), del cual no me gustaba el enfoque y decidí rehacerlo desde un punto de vista más didáctico con enfoques prácticos que apliqué en esta web.
+Este artículo es una reescritura de un post que existia en mi [antiguo blog](como-desarrolle-mi-blog), del cual no me gustaba el enfoque y decidí rehacerlo desde un punto de vista más didáctico con enfoques prácticos que apliqué en esta web. Bajo ningún punto de vista me considero un profesional en accesibilidad pero es un tópico que me interesa mucho y considero muy importante.
 
 ## ¿Qué significa que un sitio sea "accesible"?
 
@@ -40,7 +40,7 @@ Si todo esto no te pareció un motivo suficiente para interesarte por la accesib
 
 Las [Pautas de Accesibilidad para el Contenido Web (WCAG)](https://www.w3.org/WAI/standards-guidelines/wcag/es) son un estándar técnico, desarrollado por la [W3C](https://www.w3.org/), que tiene como fin satisfacer las necesidades de las personas, organizaciones o gobiernos a nivel internacional.
 
-El estándar está conformado por _13 pautas_ organizadas en [4 principios](https://www.w3.org/WAI/WCAG21/Understanding/intro#understanding-the-four-principles-of-accessibility):
+El estándar consta de _13 pautas_ agrupadas en [4 principios](https://www.w3.org/WAI/WCAG21/Understanding/intro#understanding-the-four-principles-of-accessibility):
 
 - [Perceptible](https://www.w3.org/TR/WCAG22/#perceivable): debemos contar con alternativas textuales para cualquier contenido no-textual para que pueda ser intercambiado a otras formas que la gente necesite (braille, narrador, simbolos, etc.).
 - [Operable](https://www.w3.org/TR/WCAG22/#operable): los componentes de la interfaz de usuario y navegación deben ser operables, es decir, manejados por usuarios de diferentes capacidades.
@@ -58,11 +58,8 @@ describir un menú desplegable (como si tenemos para describir un menú de naveg
 Ahí es donde entra __ARIA__ (Accesible Rich Internet Aplications) a desempeñar un papel fundamental. [WAI-ARIA](https://developer.mozilla.org/en-US/docs/Learn/Accessibility/WAI-ARIA_basics) es una especificación escrita por la W3C que nos ayuda con estos problemas añadiendo una serie de atributos HTML que pueden aplicarse a elementos para otorgarle semántica adicional y mejorar la accesibilidad.
 Esto hace que los navegadores y las tecnologias de apoyo puedan reconocer estos elementos más claramente y describirles correctamente el contenido de nuestro sitio a un usuario.
 
-En la especificación se definen 3 caracteristicas principales:
-
-- [Roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles): definen que es o que función va a cumplir el elemento.
-- [Propiedades](https://www.w3.org/TR/wai-aria-1.1/#state_prop_def): nos permiten agregarle un mejor significado o semantica a los elementos.
-- [Estados](https://www.w3.org/TR/wai-aria-1.1/#state_prop_def): propiedades especiales que definen la condición actual de los elementos. Son diferentes de las propiedades ya que el estado puede cambiar a lo largo del ciclo de vida de nuestra app (ej. `aria-expanded`).
+En la especificación se definen 3 caracteristicas principales que contribuyen a mejorar la accesibilidad web: [_roles_]((https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles)) que describen la función de los elementos, [_propiedades_]((https://www.w3.org/TR/wai-aria-1.1/#state_prop_def)) que agregan un significado o mayor semántica a los elementos y [_estados_]((https://www.w3.org/TR/wai-aria-1.1/#state_prop_def)) que son propiedades especiales
+encargadas de representar el estado actual del elemento que puede cambiar a lo largo del ciclo de vida de nuestra aplicación (ej. aria-expanded)
 
 Por ejemplo, una forma de aplicar esta especificación es la siguiente:
 
@@ -136,7 +133,35 @@ Al narrar las tecnologias con las que trabaje se leía como "Lista de 5 elemento
 </ul>
 ```
 
-Despues de realizar algunas correcciones manuales, decidí realizar algunas pruebas automáticas con Lighthouse y Validator W3.
+Despues de realizar algunas correcciones manuales, ejecuté algunas pruebas automáticas usando Lighthouse y Validator W3.
+
+Obtuve errores más que nada en el formato de las fechas, resulta que estaba utilizando el atributo datetime del elemento `<time>` con el formato `YYYY/MM/DD`:
+
+```html
+<!-- Incorrecto -->
+<time datetime="YYYY/DD/MM"></time>
+
+<!-- Correcto -->
+<time datetime="YYYY-DD-MM"></time>
+```
+
+Adicional a estos, el Validator W3 resaltó algunos errores más como este:
+
+`Attribute astro-icon not allowed on element svg at this point.`
+
+Sin embargo, no los consideré "errores" como tal dado que desde las pruebas que realicé no tenian
+un impacto negativo en la accesibilidad.
+
+Este sitio es bastante simple, por lo que con el correcto uso de los elementos HTML y algunos atributos ARIA obtenemos
+una experiencia de usuario bastante digna. De todas formas seguramente queden mejores pendientes en cuanto accesibilidad se refiere
+que iré haciendo con el tiempo.
+
+Por último, quiero recomendar realmente la lectura de [Accesibilidad Web, WCAG 2.1 de forma sencilla](https://olgacarreras.blogspot.com/2018/11/libro-accesibilidad-web-wcag-21-de.html) que no solo
+abarca este tema mucho mejor que yo, sino con mayor profundidad. Tambien nos ofrece el punto de vista de como seria aplicar la accesibilidad en un equipo de trabajo.
+
+Creo que es importante que como desarrolladores consideremos seriamente este tema. Con no tanto trabajo podemos lograr
+buenos resultados que hagan a nuestro sitio más accesible.
+
 
 ## Referencias
 - [W3](https://www.w3.org/WAI/) 
