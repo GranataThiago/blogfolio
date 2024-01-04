@@ -27,7 +27,7 @@
         </div>
     </header>
     <div class="h-full p-8 flex items-center gap-8 place-self-center">
-        <img class="grayscale" loading="lazy" src={PlaceholderImage.src} alt={job.company}>
+        <img class="grayscale hidden md:block" loading="lazy" src={PlaceholderImage.src} alt={job.company}>
         <div>
             <p class="font-bold font-mono text-3xl text-center md:text-left">{job.role}</p>
             <p class="text-center md:text-left">{job.technologies}</p>
