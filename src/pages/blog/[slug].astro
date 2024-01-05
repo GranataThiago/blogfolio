@@ -49,7 +49,8 @@ const { Content } = await post.render();
               }
             </ul>
           </div>
-        </section>
+          </section>
+        </article>
         <aside class="basis-2/6">
           <PostSummary description={post.data.description} />
           { post.data?.relatedPosts?.length > 0 ? <RelatedPosts relatedPosts={post.data.relatedPosts}/> : null }
