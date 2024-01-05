@@ -1,14 +1,14 @@
 ---
 title: ¿Qué es la Accesibilidad Web?
 author: Thiago Granata
-date: 2024-01-05T13:12:19.000Z
+date: 2024-01-05T12:00:43.938Z
 preview: ../../assets/accesibilidad.webp
 description: Qué significa la accesibilidad web y qué son los estándares como WCAG 2.1 y WAI-ARIA. Por qué es importante crear sitios accesibles y cómo podemos aplicar los estándares y utilizar herramientas de evaluación para mejorar la implementación de la accesibilidad en nuestro sitio.
 relatedPosts:
     - como-desarrolle-mi-blog
 categories:
     - accesibilidad
-draft: true
+draft: false
 slug: accesibilidad-web
 tags:
     - ARIA
@@ -23,18 +23,18 @@ tags:
 > -- Accesibilidad Web, WCAG 2.1 de forma sencilla
 
 __Aclaración:__
-Este artículo es una reescritura de un post que existia en mi [antiguo blog](como-desarrolle-mi-blog), del cual no me gustaba el enfoque y decidí rehacerlo desde un punto de vista más didáctico con enfoques prácticos que apliqué en esta web. Bajo ningún punto de vista me considero un profesional en accesibilidad pero es un tópico que me interesa mucho y considero muy importante.
+Este artículo es una reescritura de un post que existia en mi [antiguo blog](como-desarrolle-mi-blog) que decidí rehacerlo desde un punto de vista más didáctico con enfoques prácticos que apliqué en esta web. Bajo ningún punto de vista me considero un profesional en accesibilidad pero es un tópico que me interesa mucho y considero muy importante.
 
 ## ¿Qué significa que un sitio sea "accesible"?
 
 Siempre creí que denominar a un sitio web como "accesible" significaba que las personas con discapacidades tambien puedan disfrutar del contenido del mismo, 
 y sí bien es razón más que suficiente para comenzar a tomar un enfoque más accesible en el diseño de nuestras webs, la realidad es que trasciende eso.
-Hay un enfoque muy interesante en el libro de [Accesibilidad Web, WCAG 2.1 de forma sencilla](https://olgacarreras.blogspot.com/2018/11/libro-accesibilidad-web-wcag-21-de.html) que me hizo darme cuenta de esto: los problemas que pueden afectar
+Hay un enfoque muy interesante en el libro de [Accesibilidad Web, WCAG 2.1 de forma sencilla](https://olgacarreras.blogspot.com/2018/11/libro-accesibilidad-web-wcag-21-de.html) que me hizo dar cuenta de esto: los problemas que pueden afectar
 a personas de forma _temporal_ o _permanente_, tambien __los podemos sufrir nosotros en situaciones cotidianas__. _Por ejemplo_: la dificultad de una persona tetrapléjica para apuntar con el cursor, son parecidas a las que tienen las personas mayores.
 
 Entonces, __¿qué es la accesibilidad en un sitio web?__. _Para mí_ es crear webs con el objetivo de que sean __usables__ para la __mayor cantidad de personas posibles__, __sin importar__ en que __circunstancia__ se encuentren.
 
-Si todo esto no te pareció un motivo suficiente para interesarte por la accesibilidad, es esencial destacar que las __WCAG 2.0__ son __legalmente obligatorias__ en muchos países. Incluso, el incumplimiento de estas pautas puede resultar en sanciones económicas en ciertas jurisdicciones.
+Si todo esto no te pareció un motivo suficiente para interesarte por la accesibilidad, es esencial destacar que las __WCAG 2.0__ son __legalmente obligatorias__ en muchos países. Incluso, el incumplimiento de estas pautas puede generar sanciones económicas en ciertas jurisdicciones.
 
 ## Pautas de Accesibilidad para el Contenido Web (WCAG)
 
@@ -53,7 +53,7 @@ Para cada pauta contamos con tres [_criterios de conformidad_](https://www.w3.or
 ## WAI-ARIA
 
 Muchas veces, las aplicaciones webs actuales cuentan con controles no nativos que los lectores de pantallas no comprenden. Por ejemplo: HTML no cuenta con una forma semántica de
-describir un menú desplegable (como si tenemos para describir un menú de navegación `<nav>` o un footer `<footer>`), nosotros creamos esos componentes manualmente y las tecnologías de apoyo no tienen forma de entender que son o como describirlos excepto que lo especifiquemos.
+describir un menú desplegable (como si tenemos para describir un menú de navegación `<nav>` o un footer `<footer>`), nosotros creamos esos componentes manualmente y las tecnologías de apoyo no tienen forma de comprender o describirlos excepto que lo especifiquemos.
 
 Ahí es donde entra __ARIA__ (Accesible Rich Internet Aplications) a desempeñar un papel fundamental. [WAI-ARIA](https://developer.mozilla.org/en-US/docs/Learn/Accessibility/WAI-ARIA_basics) es una especificación escrita por la W3C que nos ayuda con estos problemas añadiendo una serie de atributos HTML que pueden aplicarse a elementos para otorgarle semántica adicional y mejorar la accesibilidad.
 Esto hace que los navegadores y las tecnologias de apoyo puedan reconocer estos elementos más claramente y describirles correctamente el contenido de nuestro sitio a un usuario.
@@ -152,15 +152,16 @@ Adicional a estos, el Validator W3 resaltó algunos errores más como este:
 Sin embargo, no los consideré "errores" como tal dado que desde las pruebas que realicé no tenian
 un impacto negativo en la accesibilidad.
 
-Este sitio es bastante simple, por lo que con el correcto uso de los elementos HTML y algunos atributos ARIA obtenemos
-una experiencia de usuario bastante digna. De todas formas seguramente queden mejores pendientes en cuanto accesibilidad se refiere
+Este sitio es simple, por lo que con el correcto uso de los elementos HTML y algunos atributos ARIA obtenemos
+una buena experiencia de usuario. De todas formas seguramente queden mejoras pendientes en cuanto accesibilidad se refiere
 que iré haciendo con el tiempo.
 
-Por último, quiero recomendar realmente la lectura de [Accesibilidad Web, WCAG 2.1 de forma sencilla](https://olgacarreras.blogspot.com/2018/11/libro-accesibilidad-web-wcag-21-de.html) que no solo
-abarca este tema mucho mejor que yo, sino con mayor profundidad. Tambien nos ofrece el punto de vista de como seria aplicar la accesibilidad en un equipo de trabajo.
+Por último, quiero recomendar realmente la lectura de [Accesibilidad Web, WCAG 2.1 de forma sencilla](https://olgacarreras.blogspot.com/2018/11/libro-accesibilidad-web-wcag-21-de.html) que
+abarca este tema con mayor profundidad. Tambien nos ofrece el punto de vista de como seria aplicar la accesibilidad en un equipo de trabajo y a lo largo de todas las fases del desarrollo.
 
-Creo que es importante que como desarrolladores consideremos seriamente este tema. Con no tanto trabajo podemos lograr
-buenos resultados que hagan a nuestro sitio más accesible.
+Creo que es importante como desarrolladores que consideremos seriamente este tema. Solamente teniendo en cuenta estos estándares
+durante el desarrollo podemos lograr buenos resultados que hagan a nuestro sitio más accesible contribuyendo a que la web sea un lugar más
+inclusivo.
 
 
 ## Referencias
