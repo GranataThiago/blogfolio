@@ -75,5 +75,24 @@
   "frontMatter.content.publicFolder": {
     "path": "src/assets",
     "relative": false
+  },
+  "frontMatter.content.snippets": {
+    "code": {
+      "description": "Code Block",
+      "body": [
+        "```",
+        "[[selection]]",
+        "```"
+      ],
+      "fields": [
+        {
+          "name": "selection",
+          "title": "selection",
+          "type": "string",
+          "single": true,
+          "default": ""
+        }
+      ]
+    }
   }
 }

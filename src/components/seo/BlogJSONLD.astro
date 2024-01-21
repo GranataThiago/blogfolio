@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import BlogImage from '../../assets/blog.png'
+
+
+type Props = {posts:Array<CollectionEntry<'posts'>>}
+
+const { posts } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tmgranata.com/blog"
+  },
+  "headline": "Blog | Thiago Granata",
+  "description": "Explorá mis últimos artículos y pensamientos. Desde tips de programación a innovaciones técnicas.",
+  "image": BlogImage,
+  "author": {
+    "@type": "Person",
+    "name": "Thiago Granata"
+  },
+  "keywords": "blog, temas, conocimiento",
+  "blogPost": posts?.map(({data}) => {
+    return {
+      "@type": "BlogPosting",
+      "headline": data.title,
+      "datePublished": data.date,
+      "author": {
+        "@type": "Person",
+        "name": data.author
+      },
+      "image": data.preview
+    }
+  })
+}
+
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)}></script>

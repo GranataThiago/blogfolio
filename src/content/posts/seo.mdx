@@ -1,13 +1,14 @@
 ---
 title: ¿Qué es el SEO y cómo aprovecharlo?
 author: Thiago Granata
-date: 2023-12-31
-preview: ../../assets/astro.webp
-description: Que es el SEO, rastreo, indexación, sitemaps y como aprovecharlos como desarrolladores
+date: 2024-01-19T20:31:03.986Z
+preview: ../../assets/que-es-el-seo.webp
+description: Que es el rastreo, indexación, sitemaps, datos estructurados y como aprovechar el SEO como desarrolladores para potenciar nuestros sitios webs
 relatedPosts:
     - accesibilidad-web
 categories:
     - seo
+    - web
 draft: true
 tags:
     - accesibilidad
@@ -20,11 +21,11 @@ slug: seo
 ---
 
 
-Cómo podemos aprovechar el SEO (Search Engine Optimization) para posicionar nuestro sitio web más alto en las búsquedas de Google
+Cómo podemos aprovechar el SEO (Search Engine Optimization) para posicionar nuestro sitio web en las búsquedas de Google.
 
 # ¿Cómo funciona la búsqueda de Google?
 
-La búsqueda de Google funciona es un proceso automatizado que funciona con unos 'robots' (rastreadores web) que están constantemente buscando páginas que añadir a su índice.
+La búsqueda de Google es un proceso automatizado que funciona con unos 'robots' (rastreadores web) que están constantemente buscando páginas que añadir a su índice.
 
 Este proceso de búsqueda consta de 3 etapas:
 
@@ -33,27 +34,61 @@ Este proceso consiste de Google 'descubriendo' las URLs que aún no conoce (ya s
 Una vez que Google descubre una nueva página puede revisar que contiene, para ello se vuelve a utilizar el [robot de Google](https://developers.google.com/search/docs/crawling-indexing/googlebot?hl=es).
 Es importante recalcar que al momento de revisar el contenido, Google renderiza la página, pero tambien _ejecuta el código Javascript_ que encuentre, esto es útil ya que muchas veces nuestras aplicaciones generan contenido utilizando Javascript que de otra forma no sería rastreado.
 
-Sin embargo, no siempre Google puede rastrear las páginas que descubrió. Ya sea porque nosotros mismos limitamos esa posibilidad (robots.txt), porque se requiere de iniciar sesión o por otros problemas con los que se pueda encontrar el robot. 
+Sin embargo, Google no siempre puede rastrear las páginas que descubrió. Ya sea porque nosotros mismos limitamos esa posibilidad mediante el uso de metaetiquetas o por especificaciones en el archivo robots.txt,
+porque nuestra página requiere de iniciar sesión o por otros problemas con los que se pueda encontrar el robot. 
 
 
 ### 2. Indexación
 
-Esta es la parte donde Google 'interpreta' el contenido de nuestro sitio web. En ella, se procesa todo el contenido textual, etiquetas y atributos relevantes (`<title>` `alt`), multimedia.
+Esta es la parte donde Google 'interpreta' el contenido de nuestro sitio web. En ella, se procesa todo el contenido textual, las etiquetas, atributos relevantes (como `<title>` `alt`), y multimedia (ímagenes, videos, etc).
 
-Durante este proceso es cuando se determina si la página es un duplicado de otra o es la canónica. La página canónica es aquella cuyo contenido es más útil y completo, esa página es la que va aparecer en los resultados de búsqueda y la que se rastreará con mayor frecuencia.
+Durante este proceso es cuando se determina si la página es un duplicado de otra o es la ___canónica___. La página canónica es aquella cuyo contenido es más útil y completo, esa página es la que va aparecer en los resultados de búsqueda y la que se rastreará con mayor frecuencia.
+De todas formas, los duplicados son almacenados igualmente y presentados al usuario en determinados contextos, por ejemplo: una búsqueda muy especifica.
 
 
 ### 3. Publicación de resultados de busqueda.
 
-Cuando un usuario hace una busqueda en Google, se busca en el índice páginas que coincidan con ella y devuelve los resultados de mayor calidad y más relevantes (en base a la ubicación, idioma, dispositivo).
+Cuando un usuario hace una busqueda en Google, se busca en el índice páginas que coincidan con ella y devuelve los resultados de mayor calidad y más relevantes en base a la ubicación, idioma y dispositivo, entre otros.
+
+Tambien es interesante destacar que el formato del contenido que se va a mostrar, depende de la búsqueda hecha por el usuario. Es decir: si nosotros buscamos "gimnasio" es
+probable que obtengamos resultados de gimnasios cerca pero si buscamos "entrenamiento" probablemente nos aparezcan respuestas mucho más conceptuales. 
+
+Desde el punto de vista del desarrollo, esto está muy ligado a los [datos estructurados](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data?hl=es-419).
+Un ejemplo de esto es cuando buscamos "Receta de Brownies", ademas de mostrar los resultados de la manera tradicional Google va a analizar el contenido de las páginas en busca de aquellas que posean un [Schema](https://schema.org/) (en este caso de tipo _Recipe_)
+y va a presentar algunos de ellos de una forma diferente
+
+![Datos Estructurados](https://res.cloudinary.com/dcb31ckjr/image/upload/v1705850441/seo/awqbqxcrs2x750bu9mr6.webp)
+
+Cómo podemos observar en la imagen, aquellas páginas que tienen un Schema son presentadas de una forma mucho más destacable
+y que mejoran en general la presentación y visibilidad del contenido.
 
 # Conceptos básicos del SEO
 
 Cómo desarrolladores, podemos ayudar a Google a que indexe nuestro contenido correctamente. La forma recomendada es creando un _sitemap_ para nuestro sitio, un sitemap es un archivo
-que proporciona información de nuestro sitio web (páginas, videos, etc). Los buscadores utilizan estos archivos para rastrear los sitios web de manera más eficiente.
+que proporciona información de nuestro sitio web (páginas, videos, etc) usualmente escrito en XML.
+
+Por ejemplo: esta es una parte del sitemap que generó [`@astro/sitemap`](https://docs.astro.build/es/guides/integrations-guide/sitemap/) para este sitio 
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+    <url>
+        <loc>
+            https://tmgranata.com/
+        </loc>
+    </url>
+    <url>
+        <loc>
+            https://tmgranata.com/blog/
+        </loc>
+    </url>
+</urlset>
+```
+
+Los buscadores utilizan estos archivos para rastrear los sitios web de manera más eficiente.
 De todas formas, un sitemap no siempre es _obligatorio_ pero puede ser de gran ayuda en ciertos casos [(más información de sitemaps)](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview?hl=es).
 
-También es muy efectivo utilizar correctamente las etiquetas `<title>` y `<meta>`. En general hay algunas cosas a tener en cuenta cuando estamos utilizando estas etiquetas:
+También es muy efectivo utilizar correctamente las etiquetas HTML `<title>` y `<meta>`. En general existen ciertas normas que nos pueden ayudar a ser más efectivos al utilizarlas:
 
 - Elegir un titulo que describa con precisión el contenido de la página. El titulo debe ser breve pero descriptivo, que sea muy largo puede generar que Google termine mostrando
 solo una parte de él.
@@ -68,7 +103,73 @@ mucho más agradable para nuestros usuarios y por ende para los buscadores.
 
 # Como apliqué esto
 
-Por suerte Astro hace algunas de las cosas muy sencillas gracias a las integraciones con las que cuenta
-Creé un sitemap utilizando `astro/sitemap`, agregué un rss `astro/rss`
+Por suerte Astro hace algunas de las cosas muy amenas gracias a las integraciones que posee.
+Primero comencé por crear el sitemap, utilizando `@astro/sitemap`. Para ello, instalé el paquete y lo agregué como una integración
+
+```javascript
+// astro.config.mjs
+export default defineConfig({
+  integrations: [sitemap()],
+  (...)
+});
+```
+
+Adicionalmente, tenía que añadir el sitemap generado tanto al head del sitio como al archivo robots.txt
+
+```html
+<!-- Layout.astro -->
+<head>
+  <link rel="sitemap" href="/sitemap-index.xml" />
+</head>
+```
+
+```
+// robots.txt
+Sitemap: https://www.tmgranata.com/sitemap-index.xml
+```
 
 Después, verifiqué mi dominio en [Google Search Console](https://search.google.com/search-console) con el fin de poder utilizar las herramientas que nos provee. 
+
+Uno de los problemas que tuve era que al buscar mi sitio mediante `site:tmgranata.com` los artículos y categorias no eran indexados por Google. 
+
+![Los artículos y categorias de mi sitio no se indexan correctamente](https://res.cloudinary.com/dcb31ckjr/image/upload/v1705502008/seo/lkuwncuqbfy994s35zhv.webp)
+
+Para solucionar esto envié el sitemap generado mediante el search console. Esto hizo que Google descubra esas páginas, pero aún asi, no las indexaba  (Discovered: Currently not indexed). Tras investigar un poco como podia
+resolver esto, me encontré con que podia solicitar manualmente la indexación de las páginas.
+
+![Página no indexada](https://res.cloudinary.com/dcb31ckjr/image/upload/v1705502008/seo/csclshhh1d66jgysg1fs.webp)
+
+![Indexación solicitada](https://res.cloudinary.com/dcb31ckjr/image/upload/v1705502008/seo/ypquwqpxfvjguigy4uqa.webp)
+
+Si bien esto no es ideal ya que claramente me gustaría que Google indexe automáticamente mis páginas, es una forma de resolverlo hasta encontrar una solución definitiva
+al problema. Una vez enviadas todas las solicitudes de indexación quedaba esperar.
+
+Despues de unas cuantas horas, Google indexó casi todas las URLS que había solicitado inspeccionar:
+
+![Páginas Indexadas](https://res.cloudinary.com/dcb31ckjr/image/upload/v1705695837/seo/x7utnowtsgnehbvcwzvw.webp)
+
+No podia faltar tratar con datos estructurados, así que agregué el schema de _BlogPosting_ a los articulos en mi página. Para ello, tuve que usar [JSON-LD](https://json-ld.org/) (JSON for Linking Data)
+y simplemente "mapear" los atributos de Frontmatter a los que definia el schema de BlogPosting. 
+
+El resultado final en un articulo real se ve algo así:
+
+```html
+<script type="application/ld+json" data-astro-exec>
+{
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"¿Qué es el SEO y cómo aprovecharlo?",
+    "description":"Que es el rastreo, indexación, sitemaps, datos estructurados y como aprovechar el SEO como desarrolladores para potenciar nuestros sitios webs",
+    "keywords":["accesibilidad","seo","astro","google","index","sitemaps"],
+    "author":{
+        "@type":"Person",
+        "name":"Thiago Granata",
+        "url":"https://tmgranata.com"
+    },
+    "datePublished":"2024-01-19"
+}
+</script>
+```
+
+Si les interesa como pueden hacer esto utilizando Astro, hay un artículo que lo explica muy bien:
+[Adding structured data to blog posts using Astro](https://frodeflaten.com/posts/adding-structured-data-to-blog-posts-using-astro/)

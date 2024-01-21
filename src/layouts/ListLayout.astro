@@ -3,13 +3,14 @@ import { getCollection } from "astro:content";
 import Layout from "./Layout.astro";
 import BlogImage from '../assets/blog.png'
 import Tag from "../components/ui/Tag.astro";
+import BlogJSONLD from "../components/seo/BlogJSONLD.astro";
 
 const allPosts = await getCollection('posts', ({data}) =>  import.meta.env.DEV || !data?.draft)
 const categories = [...new Set(allPosts.map((post) => post.data.categories).flat())];
-
 ---
 
 <Layout title="Thiago Granata | Blog" description="Explorá mis últimos artículos y pensamientos. Desde tips de programación a innovaciones técnicas." imageUrl={BlogImage}>
+    <BlogJSONLD slot='head' posts={allPosts} />
     <main class="container !pt-0 !mt-4">
         <section class="articles flex gap-8 flex-col-reverse lg:flex-row">
             <slot />

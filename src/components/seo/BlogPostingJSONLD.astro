@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content'
+
+
+type Props = CollectionEntry<'posts'>['data']
+const { title, author, date, description, tags, preview } = Astro.props;
+
+const schema = {
+    '@context': "https://schema.org",
+    '@type': 'BlogPosting',
+    'headline': title,
+    'description': description,
+    'keywords': tags,
+    'author': {
+        '@type': "Person",
+        'name': author,
+        'url': 'https://tmgranata.com'
+    },
+    'datePublished': date.toISOString().substring(0, 10),
+    'thumbnail': preview 
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)}></script>

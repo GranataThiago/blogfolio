@@ -3,6 +3,7 @@ import { getCollection, type CollectionEntry } from 'astro:content'
 import Layout from '../../layouts/Layout.astro';
 import PostSummary from "../../components/ui/PostSummary.astro";
 import RelatedPosts from "../../components/ui/RelatedPosts.astro";
+import BlogPostingJSONLD from '../../components/seo/BlogPostingJSONLD.astro';
 
 
 export async function getStaticPaths () {
@@ -25,7 +26,8 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 <Layout title={post.data.title} description={post.data.description} imageUrl={post.data.preview}>
-    <main class="container !pt-0 !m-auto flex gap-16 flex-col-reverse lg:flex-row">
+  <BlogPostingJSONLD slot='head' {...post.data}/>  
+  <main class="container !pt-0 !m-auto flex gap-16 flex-col-reverse lg:flex-row">
         <article class="mx-auto basis-4/6">
           <header class="mb-8">
             <h1 class="font-bold font-mono text-4xl">{post.data.title}</h1>

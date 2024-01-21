@@ -53,6 +53,7 @@ const image = new URL(imageUrl?.src || '', Astro.site);
 		<meta name="twitter:description" content={description || 'Thiago Michay'}>
 		<meta name="twitter:image" content={image}>
 		<meta name="twitter:url" content={url}>
+		<slot name="head" />
 		<ViewTransitions handleForms/>
 	</head>
 	<body>
