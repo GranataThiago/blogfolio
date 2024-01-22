@@ -14,5 +14,7 @@ export async function GET(context) {
       link: `/blog/${post.slug}/`,
     })),
     customData: `<language>es</language>`,
+    stylesheet: '/pretty-feed-v3.xsl',
   })
 }
+

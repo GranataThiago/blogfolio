@@ -30,9 +30,9 @@ La búsqueda de Google es un proceso automatizado que funciona con unos 'robots'
 Este proceso de búsqueda consta de 3 etapas:
 
 ### 1. Rastreo
-Este proceso consiste de Google 'descubriendo' las URLs que aún no conoce (ya sea porque son nuevas o porque fueron actualizadas). Ahora, _¿cómo descubre Google estas URL?_ Esto lo logra siguiendo enlaces de páginas conocidas que lo lleven a nuevas ó tambien mediante el [sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview?hl=es).
+Esta etapa consiste de Google 'descubriendo' las URLs que aún no conoce (ya sea porque son nuevas o porque fueron actualizadas). Ahora, _¿cómo descubre Google estas URL?_ Esto lo logra siguiendo enlaces de páginas conocidas que lo lleven a nuevas ó también mediante el [sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview?hl=es).
 Una vez que Google descubre una nueva página puede revisar que contiene, para ello se vuelve a utilizar el [robot de Google](https://developers.google.com/search/docs/crawling-indexing/googlebot?hl=es).
-Es importante recalcar que al momento de revisar el contenido, Google renderiza la página, pero tambien _ejecuta el código Javascript_ que encuentre, esto es útil ya que muchas veces nuestras aplicaciones generan contenido utilizando Javascript que de otra forma no sería rastreado.
+Es importante recalcar que al momento de revisar el contenido, Google renderiza la página, pero también _ejecuta el código Javascript_ que encuentre, esto es útil ya que muchas veces nuestras aplicaciones generan contenido utilizando Javascript que de otra forma no sería rastreado.
 
 Sin embargo, Google no siempre puede rastrear las páginas que descubrió. Ya sea porque nosotros mismos limitamos esa posibilidad mediante el uso de metaetiquetas o por especificaciones en el archivo robots.txt,
 porque nuestra página requiere de iniciar sesión o por otros problemas con los que se pueda encontrar el robot. 
@@ -50,7 +50,7 @@ De todas formas, los duplicados son almacenados igualmente y presentados al usua
 
 Cuando un usuario hace una busqueda en Google, se busca en el índice páginas que coincidan con ella y devuelve los resultados de mayor calidad y más relevantes en base a la ubicación, idioma y dispositivo, entre otros.
 
-Tambien es interesante destacar que el formato del contenido que se va a mostrar, depende de la búsqueda hecha por el usuario. Es decir: si nosotros buscamos "gimnasio" es
+También es interesante destacar que el formato del contenido que se va a mostrar, depende de la búsqueda hecha por el usuario. Es decir: si nosotros buscamos "gimnasio" es
 probable que obtengamos resultados de gimnasios cerca pero si buscamos "entrenamiento" probablemente nos aparezcan respuestas mucho más conceptuales. 
 
 Desde el punto de vista del desarrollo, esto está muy ligado a los [datos estructurados](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data?hl=es-419).
@@ -62,12 +62,12 @@ y va a presentar algunos de ellos de una forma diferente
 Cómo podemos observar en la imagen, aquellas páginas que tienen un Schema son presentadas de una forma mucho más destacable
 y que mejoran en general la presentación y visibilidad del contenido.
 
-# Conceptos básicos del SEO
+# Como ayudar a Google a indexar nuestro contenido
 
 Cómo desarrolladores, podemos ayudar a Google a que indexe nuestro contenido correctamente. La forma recomendada es creando un _sitemap_ para nuestro sitio, un sitemap es un archivo
 que proporciona información de nuestro sitio web (páginas, videos, etc) usualmente escrito en XML.
 
-Por ejemplo: esta es una parte del sitemap que generó [`@astro/sitemap`](https://docs.astro.build/es/guides/integrations-guide/sitemap/) para este sitio 
+Por ejemplo: esta es una parte del sitemap que generó [`@astrojs/sitemap`](https://docs.astro.build/es/guides/integrations-guide/sitemap/) para este sitio 
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -104,7 +104,7 @@ mucho más agradable para nuestros usuarios y por ende para los buscadores.
 # Como apliqué esto
 
 Por suerte Astro hace algunas de las cosas muy amenas gracias a las integraciones que posee.
-Primero comencé por crear el sitemap, utilizando `@astro/sitemap`. Para ello, instalé el paquete y lo agregué como una integración
+Primero comencé por crear el sitemap, utilizando `@astrojs/sitemap`. Para ello, instalé el paquete y lo agregué como una integración
 
 ```javascript
 // astro.config.mjs
@@ -172,4 +172,43 @@ El resultado final en un articulo real se ve algo así:
 ```
 
 Si les interesa como pueden hacer esto utilizando Astro, hay un artículo que lo explica muy bien:
-[Adding structured data to blog posts using Astro](https://frodeflaten.com/posts/adding-structured-data-to-blog-posts-using-astro/)
+[Adding structured data to blog posts using Astro](https://frodeflaten.com/posts/adding-structured-data-to-blog-posts-using-astro/).
+
+Como algo adicional, agregué un [RSS Feed](https://es.wikipedia.org/wiki/RSS) (Really Simple Syndication) que les permite a los usuarios "suscribirse" a una web
+y recibir el contenido actualizado de ella mediante programas diseñados para leer RSS.
+
+Para agregar el feed, existe un paquete dentro de Astro que puede generarlo automáticamente (`@astrojs/rss`),
+realicé las configuraciones necesarias y agregué el feed al footer del sitio. No obstante, RSS se escribe
+en XML, por lo que si clickeamos el link vamos a previsualizar directamente el código:
+
+```xml
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+  ...
+  </channel>
+</rss>
+```
+
+
+Si bien esto no está mal (ya que la idea es que los usuarios consuman el contenido desde 
+su lector preferido y no desde la fuente) podia ser extraño para ciertos usuarios, así que agregué un template de 
+estilos al feed ([pretty-feed-v3](https://github.com/genmon/aboutfeeds/blob/main/tools/pretty-feed-v3.xsl)) para
+obtener un primer vistazo un poco más amigable.
+
+Estilar el RSS Feed tiene algunas desventajas (como bien se detalla en el Github del template) pero considero que
+las ventajas son mayores.
+
+# Conclusiones
+
+En el artículo detallamos como los desarrolladores podemos aprovechar el SEO para mejorar la visibilidad
+y el rendimiento de nuestros sitios, desde la teoria detras del proceso de búsqueda hasta la implementación práctica
+de buenas prácticas de SEO.
+
+Personalmente, redactar este artículo me ayudó a comprender mucho mejor cómo funciona la búsqueda en los navegadores y también
+me permitió implementar mejoras significativas en mi propio sitio web.
+
+## Referencias
+
+- [Fundamentos de SEO](https://developers.google.com/search/docs/fundamentals/get-on-google?hl=es)
+
+

@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import RSSLogo from '../../assets/rss.webp'
 import Logo from '../../assets/tmgranata.svg'
 import Icon from "astro-icon";
 
@@ -55,6 +56,14 @@ import Icon from "astro-icon";
                     </a>
                 </li>
             </ul>
+            
+            <hr class="my-2">
+
+            <div class="flex flex-row gap-4 items-center ">
+                <p>RSS Feed</p>
+                <a href="rss.xml"><Image width={16} height={16} src={RSSLogo} alt="Subscribe to My Website"></a>
+            </div>
+
         </div>
     </div>
 </footer>
