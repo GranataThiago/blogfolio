@@ -1,0 +1,14 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+export interface TaggedContainerProps extends HTMLAttributes<'video'>{
+
+}
+
+const { class: className, src } = Astro.props;
+---
+
+
+<video autoplay muted loop>
+    <source src={src}>
+</video>

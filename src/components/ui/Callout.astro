@@ -1,0 +1,13 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+
+export interface TaggedContainerProps extends HTMLAttributes<'div'>{
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class:list={["bg-text text-white flex flex-row items-center justify-start gap-2 p-2 text-sm", className]}>
+    <p class="text-3xl m-0">💡</p> <slot />
+</div>
