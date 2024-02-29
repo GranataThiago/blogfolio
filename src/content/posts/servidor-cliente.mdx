@@ -22,7 +22,7 @@ import Video from '../../components/ui/Video.astro'
 import Callout from '../../components/ui/Callout.astro'
 
 
-Se formó mucho revuelo con la salida de Next 14 y las directivas `use client` y `use server`. Esto trajo muchas dudas cómo:
+Se formó mucho revuelo con la salida de [Next 14](https://nextjs.org/blog/next-14) y las directivas `use client` y `use server`. Esto trajo muchas dudas cómo:
 
 - ¿Qué es el servidor?
 - ¿Qué son los Server Components? ¿Es lo mismo que SSR?
@@ -33,9 +33,9 @@ Y si bien no estoy **tan** integrado dentro del ecosistema de React y Next, toda
 
 Para responder todas estas preguntas, me parece interesante remontarnos a lo más fundamental de todo.
 
-# Mi experiencia
+# ¿Por qué el revuelo?
 
-Pero antes que nada, le quiero comentar un poco sobre mi experiencia:
+Pero antes que nada, le quiero comentar un poco sobre mi experiencia (que a su vez, puede explicar la razón del revuelo):
 Para los desarrolladores que incursionamos en el desarrollo web en los últimos años es normal tener el modelo mental del Client-side Rendering como regla.
 Esto debido a que es la técnica que se utilizaba mayormente en los frameworks como React ó Angular.
 
@@ -64,11 +64,11 @@ Si lo pensamos a grandes rasgos parece algo simple:
 
 Como habia dicho, esto es esencialmente simple, podriamos decir que son dos computadoras comunicandose mediante protocolos preestablecidos. Pero, ¿de qué nos sirve conocer esto?
 
-Imaginemos que al realizar esa petición a *tmgranata.com* el navegador responde con un documento HTML **estático**, sin Javascript ni frameworks en el medio. Básicamente nos estaría devolviendo el HTML para que nuestro navegador se encargue de renderizarlo.
+Imaginemos que al realizar esa petición a *tmgranata.com* el navegador responde con un documento HTML **estático**, sin JavaScript ni frameworks en el medio. Básicamente nos estaría devolviendo el HTML para que nuestro navegador se encargue de renderizarlo.
 
 <Video src="https://res.cloudinary.com/dcb31ckjr/video/upload/v1708619000/servidor-cliente/static-html_xcitaa.mp4" />
 
-Sin embargo esto es completamente estático, y el usuario no tiene ningún tipo de interacción con el sitio. ¿Qué pasa si queremos sumarle algo de interactividad a la página? Tendriamos que sumarle **Javascript**. Lo que significa responder con un archivo más (`script.js`)
+Sin embargo esto es completamente estático, y el usuario no tiene ningún tipo de interacción con el sitio. ¿Qué pasa si queremos sumarle algo de interactividad a la página? Tendriamos que sumarle **JavaScript**. Lo que significa responder con un archivo más (`script.js`)
 
 <Video src="https://res.cloudinary.com/dcb31ckjr/video/upload/v1708619000/servidor-cliente/static-html-js_d8vlcj.mp4" />
 
@@ -76,41 +76,44 @@ Pero todavia Javascript no se involucra en el proceso de renderizado de nuestra 
 
 # Técnicas de renderizado
 
-Entonces, ¿donde entra todo este tema del **SSG**, **SSR** ó **CSR**?
-Para entenderlo vamos a imaginar el siguiente ejemplo: 
-Vamos a suponer que el cliente (nosotros) realiza una petición a `https://tmgranata.com/blog/ejemplo` y a partir de ahí analicemos estas 3 técnicas
+Existen principalmente 3 técnicas para renderizar contenido en la web. Para entenderlas, consideremos el mismo ejemplo:
 
-<Callout>
-En los ejemplos, no voy a tener en cuenta el proceso de darle interactividad a nuestra página (Hydration), eso lo vamos a comentar más adelante
-</Callout>
+Vamos a suponer que el cliente (nosotros) realiza una petición a `https://tmgranata.com/blog/ejemplo` y a partir de ahí analicemos estas 3 técnicas
 
 ## Static Site Generation
 
 <Video src="https://res.cloudinary.com/dcb31ckjr/video/upload/v1708634334/servidor-cliente/ssg_o1atve.mp4" />
 
-Con SSG generamos todas las páginas de nuestra aplicación en build-time (por ejemplo: al ejecutar `npm run build`). Esto quiere decir
+Con SSG generamos todas las páginas de nuestra aplicación en build-time. Esto quiere decir
 que generamos todos los documentos HTML estáticos para renderizarlos según la página que se nos solicite.
 
 Entonces lo que va a pasar cuando el usuario solicite la página (`/blog/ejemplo`) es que el servidor va a ir a buscar
 ese recurso y le va a servir al cliente el archivo HTML previamente generado.
 
-Esto es bastante rápido y es algo ideal para el ejemplo que estamos dando, ya que el contenido de un artículo no es algo que 
-vaya a cambiar de manera frecuente, y si lo hace basta con generar el build de la aplicación nuevamente para mostrar el contenido
-actualizado.
+Esto es algo ideal para el ejemplo que estamos dando, ya que el contenido de un artículo no cambia con frecuencia, y si lo hace basta con generar el build de la aplicación nuevamente para mostrar el contenido
+actualizado. Además, está técnica es muy amigable con el SEO y los tiempos de carga son bastante rápidos.
+
+También tiene sus puntos negativos, por ejemplo: si tenemos millones de articulos y necesitamos actualizarlos, tendriamos que reconstruir
+la aplicación nuevamente. El build de una aplicación de ese tamaño no solo puede llevar mucho tiempo, sino que también puede tener repercusiones en el SEO
+al actualizar el sitemap. Esto podría hacer que Google utilice su Crawl Budget revisando contenido que ya indexó, pasando por alto nuestro nuevo contenido.
 
 ## Server-side Rendering
 
 <Video src="https://res.cloudinary.com/dcb31ckjr/video/upload/v1708688281/servidor-cliente/ssr_abwxvm.mp4" />
 
-En el SSR el HTML se genera del lado del servidor en cada request. Esto significa que al recibir la petición el servidor
-va a fetchear la información (ya sea llamando a una API u obteniendo la información desde una base de datos) y en base a eso generará
-el HTML correspondiente que luego le servirá al cliente. 
+En el SSR el HTML se genera del lado del servidor en cada request. Esto significa que al recibir la petición del cliente, el servidor
+va a solicitar la información (ya sea llamando a una API u obteniendo la información desde una base de datos) y generará
+el HTML correspondiente que luego servirá al cliente. 
+
+Esta técnica también es amigable con el SEO y mejora los tiempos de carga en comparación al CSR al mostrar contenido de manera inmediata.
+Como contra, nuestro servidor debe ocuparse de generar el contenido, lo que puede requerir más recursos. Y si nuestro servidor está sobrecargado, se pueden
+experimentar tiempos de carga más lentos.
 
 ## Client-side Rendering
 
 <Video src="https://res.cloudinary.com/dcb31ckjr/video/upload/v1708694305/servidor-cliente/csr_khymkv.mp4" />
 
-Con el CSR por su parte, el cliente es quien se encarga de generar el HTML, usualmente el servidor nos devuelve un archivo Javascript y a partir
+Con el CSR por su parte, el cliente es quien se encarga de generar el HTML, usualmente el servidor nos devuelve un archivo JavaScript y a partir
 de él se renderiza nuestra aplicación. Por eso es que es normal que lo primero que veamos al navegar un sitio web que utilice CSR
 sea una página en blanco.
 
@@ -129,6 +132,9 @@ Si observamos el HTML que recibimos en la sección 'Network' al cargar el sitio,
 </html>
 ```
 
+Como punto positivo, una vez que se carga el JavaScript, el sitio funciona muy rápido y el usuario puede interactúar instantaneamente con él. Por su parte, no es muy amigable con el SEO y pueden sufrir de tiempos
+de carga más lentos.
+
 # Combinación de técnicas
 
 Es importante recalcar que todas las técnicas tienen pros y contras y elegir utilizar una u otra es una decisión que tomar en relación al problema que hay que resolver.
@@ -136,7 +142,7 @@ De la misma forma podemos utilizar más de una técnica a la vez en nuestro siti
 
 Por ejemplo: Con el [Pages Directory](https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration), **Next.js** nos brinda del **ISR** (Incremental Static Regeneration) qué significa que vamos a generar las páginas en build-time,
 como con SSG, pero cada un tiempo que nosotros establezcamos el contenido de esa página se va a invalidar y, cuando llegue una nueva petición,
-vamos a generarlo nuevamente.
+vamos a generarlo nuevamente. También podemos revalidar nuestro contenido [on-demand](https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration#on-demand-revalidation), lo que es ideal cuando cambia nuestro contenido o metadata.
 
 <Callout>
     Desde la salida del App Directory en Next, el ISR ya no se utiliza. Si les interesa conocer más acerca
@@ -157,14 +163,14 @@ articulo dedicado a Astro, lo voy a dejar para otro momento.
 
 A esta altura del artículo hice mención varias veces a "hidratar" o "hydration". ¿Pero a qué le llamamos 'hidratar'?.
 
-La hidratación es el proceso en el cual nuestro sitio web descarga el Javascript y se dota de interactividad. En un paso a paso se vería algo así:
+La hidratación es el proceso en el cual nuestro sitio web descarga el JavaScript y se dota de interactividad. En un paso a paso se vería algo así:
 
 1. El usuario realiza una petición en su navegador (por ejemplo: busca *tmgranata.com*)
 2. El *protocolo DNS* se encarga de asociar el dominio con la **IP** del sitio
 3. Se envia una petición **HTTP** a dicha **IP** mediante **TCP**
 4. El servidor procesa la solicitud y responde con un HTML
 5. Se renderiza nuestro HTML, pero aún no podemos interactuar con el contenido.
-6. Se descarga el Javascript, que luego 'hidrata' el contenido estático previamente renderizado para agregarle interactividad.
+6. Se descarga el JavaScript, que luego 'hidrata' el contenido estático previamente renderizado para agregarle interactividad.
 
 A partir del punto número 6 es cuando el usuario puede interactuar con el sitio web. Esta técnica es comunmente utilizada en páginas
 que utilicen SSG o SSR.
@@ -267,7 +273,7 @@ Desde una [demo](https://github.com/reactjs/server-components-demo) del equipo d
 > Por otro lado, SSR, te permite generar el HTML antes de cargar cualquier archivo JavaScript (...)
 
 
-Entonces, como comentamos previamente, **SSR** es una estrategia de renderizado que nos ayuda principalmente en la carga inicial de nuestro sitio web (FCP) al renderizar
+Entonces, como comentamos previamente, **SSR** es una estrategia de renderizado que nos ayuda en disminuir el tiempo que demora el contenido en 'pintarse' en la pantalla del usuario (FCP) al renderizar
 primeramente el HTML estático de nuestra aplicación permitiendo que el usuario vea *algo* rápidamente y luego obtener interactividad mediante el proceso de *hydration*.
 
 Los **Server Components** son una manera de ejecutar un componente exclusivamente del lado del servidor para enviarlo al cliente, sin re-renders ni cambios de estado.
