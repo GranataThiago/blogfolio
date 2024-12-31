@@ -18,7 +18,7 @@ export const WORK_EXPERIENCE = [
         technologies: "Node, Typescript, Shopify, "
     },
     {
-        company: 'Freelancer',
+        company: 'DocDental',
         role: "Front-end Developer",
         date: { from: "2024-08-01", to: "Actualidad" }, 
         technologies: "Next, Node, Express"

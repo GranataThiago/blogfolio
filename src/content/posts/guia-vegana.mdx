@@ -1,0 +1,59 @@
+---
+title: Desarrollando Guía Vegana
+description: "Cómo desarrollé mi proyecto personal: GuíaVegana. Desde 0 hasta producción"
+date: 2024-12-31T19:00:39.123Z
+preview: ../../assets/accesibilidad.webp
+draft: true
+tags: 
+    - guiavegana
+    - programacion
+    - personal
+    - web
+categories: 
+    - programacion 
+    - personal 
+    - web
+author: ""
+relatedPosts: 
+    - como-desarrolle-mi-blog
+published: false
+---
+
+# Introducción
+
+[Guía Vegana](https://guiavegana.ar) es un proyecto que quise hacer durante mucho tiempo, incluso lo había comenzado en múltiples ocasiones, pero nunca había logrado llevarlo a cabo completamente. 
+Fue hace, apróximadamente, dos meses cuando decidí tomarmelo enserio y desarrollarlo. La idea era simple: *quería recolectar múltiples restaurantes ubicados en Argentina que cuenten con opciones veganas*.
+Si bien esto es algo que ya existe, no había lugares destacados a nivel local y me parecía que podía sumarle algunas features interesantes.
+
+## El Stack Tecnológico
+
+Mi objetivo a nivel técnico con el frontend era desarrollar una aplicación con un rendimiento sólido y un buen SEO para lograr el máximo alcance orgánico posible. Para esto mi idea era generar la mayor parte
+de las páginas de manera estática y solo renderizar dinámicamente aquellas secciones que **realmente** lo necesiten. Por todo esto, mi entretenimiento personal y la experiencia de desarrollo decidí utilizar *Astro* 
+
+Por el lado del backend, no tenía muchas alternativas si quería mantener los tiempos de desarrollo bajos, considerando que en ese campo sólo utilicé Node, me parecía una opción idónea.
+
+En resumidas cuentas:
+- Astro
+- Node (Express)
+- MongoDB
+
+
+## Desplegando el proyecto
+
+Para llevar el proyecto a producción utilicé dos servicios: [Vercel](https://vercel.com/) (frontend) y [DigitalOcean](https://www.digitalocean.com/) (backend). 
+
+Desplegar un proyecto en Vercel es bastante directo, solamente linkeamos nuestro Github/Gitlab y seleccionamos el proyecto que queremos. 
+Vercel se encarga del resto siempre y cuando sea una tecnología soportada por la plataforma. En este caso, Astro es perfecto, tiene un adaptador que funciona sin problemas ni configuraciones extremas con Vercel ([@astro/vercel](https://vercel.com/docs/frameworks/astro))
+
+A nivel frontend entonces, desplegar la aplicación no requiere de más que 
+```bash
+git add .
+git commit -m "new feature 😁"
+git push origin main
+```
+
+En cuanto al backend y DigitalOcean, si bien requiere mayor configuración que Vercel, tampoco es una tarea tan complicada. Me ayudé de dos artículos para lograrlo:
+
+- [How to Set Up a Node.js Application for Production on Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-20-04)
+- [Levantar un servidor de Node en DigitalOcean con PM2, NGINX, Dominio Personalizado y Certificado SSL](https://tomihq-dev.vercel.app/blog/pm2-nginx-digitalocean-domain-ssl-certificate)
+
