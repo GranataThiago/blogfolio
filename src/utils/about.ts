@@ -19,8 +19,8 @@ export const WORK_EXPERIENCE = [
     },
     {
         company: 'DocDental',
-        role: "Front-end Developer",
-        date: { from: "2024-08-01", to: "Actualidad" }, 
-        technologies: "Next, Node, Express"
+        role: "Frontend Developer",
+        date: { from: "2024-08-01", to: "2024-12-31" }, 
+        technologies: "Next"
     }
 ]
