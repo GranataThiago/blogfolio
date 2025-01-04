@@ -1,9 +1,9 @@
 ---
-title: Desarrollando Guía Vegana
-description: "Cómo desarrollé mi proyecto personal: GuíaVegana. Desde 0 hasta producción"
+title: "Diario de desarrollo #1: Guía Vegana"
+description: "Cómo desarrollé mi proyecto personal: GuíaVegana. Desde 0 hasta producción. Idea, desarrollo y despliegue"
 date: 2024-12-31T19:00:39.123Z
-preview: ../../assets/accesibilidad.webp
-draft: true
+preview: ../../assets/guia-vegana.webp
+draft: false
 tags: 
     - guiavegana
     - programacion
@@ -13,34 +13,89 @@ categories:
     - programacion 
     - personal 
     - web
-author: ""
+author: "Thiago Granata"
 relatedPosts: 
     - como-desarrolle-mi-blog
-published: false
+    - servidor-cliente
+published: true
 ---
+import Callout from '../../components/ui/Callout.astro'
+
 
 # Introducción
 
 [Guía Vegana](https://guiavegana.ar) es un proyecto que quise hacer durante mucho tiempo, incluso lo había comenzado en múltiples ocasiones, pero nunca había logrado llevarlo a cabo completamente. 
-Fue hace, apróximadamente, dos meses cuando decidí tomarmelo enserio y desarrollarlo. La idea era simple: *quería recolectar múltiples restaurantes ubicados en Argentina que cuenten con opciones veganas*.
+Fue hace, apróximadamente, dos meses cuando decidí tomarmelo enserio y desarrollarlo de principio a fin. La idea era simple: *quería recolectar múltiples restaurantes ubicados en Argentina que cuenten con opciones veganas*.
 Si bien esto es algo que ya existe, no había lugares destacados a nivel local y me parecía que podía sumarle algunas features interesantes.
 
 ## El Stack Tecnológico
 
-Mi objetivo a nivel técnico con el frontend era desarrollar una aplicación con un rendimiento sólido y un buen SEO para lograr el máximo alcance orgánico posible. Para esto mi idea era generar la mayor parte
-de las páginas de manera estática y solo renderizar dinámicamente aquellas secciones que **realmente** lo necesiten. Por todo esto, mi entretenimiento personal y la experiencia de desarrollo decidí utilizar *Astro* 
+Mi objetivo a nivel técnico con el frontend era desarrollar una aplicación con un rendimiento sólido y un buen SEO para lograr el mayor alcance posible de manera orgánica. Para esto, mi idea era generar prácticamente todas las páginas
+de manera estática y solo renderizar dinámicamente (client-side) aquellas secciones que **realmente** lo necesiten. Debido a estos requerimientos, sumado a mi entretenimiento personal (realmente me gusta *mucho* el framework) y la experiencia de desarrollo, decidí utilizar **Astro** 
 
-Por el lado del backend, no tenía muchas alternativas si quería mantener los tiempos de desarrollo bajos, considerando que en ese campo sólo utilicé Node, me parecía una opción idónea.
+Por el lado del backend, no tenía muchas alternativas si quería mantener los tiempos de desarrollo breves, considerando que en ese campo sólo utilicé Node, me parecía una opción idónea.
 
 En resumidas cuentas:
 - Astro
+- React (para esos componentes que requieran mayor interactividad)
 - Node (Express)
 - MongoDB
+
+En su momento consideré que este stack era más que suficiente para construir lo que quería. Y creo que no me equivoqué.
+
+## Construyendo Guía Vegana
+
+Lo primero que hice para comenzar a construir el proyecto fue sin duda lo más importante: **comprar el dominio**. Uno más a la lista. Pero también adquirí el dominio como una forma de obligarme
+a terminar el proyecto. No estaba del todo seguro qué dominio comprar, pero me terminé decidiendo por [https://guiavegana.ar](https://guiavegana.ar)
+
+Para ahorra tiempo, utilicé un [starter](https://github.com/tomihq/express-joi-typescript) que me permitió configurar rápidamente el backend con un skeleton preparado. Modelé la base de datos y creé un cluster en [MongoDB Atlas](https://www.mongodb.com/products/platform/atlas-database). Agregué algunos datos dummies y con
+eso ya tenía un backend funcional, lo cual era más que suficiente para comenzar el desarrollo del frontend.
+
+Realmente el desarollo del frontend no requirió un gran trabajo, finalmente el sitio funciona como un listado, por lo que es relativamente fácil de hacer. Sin embargo, hay algunas cuestiones 
+que surgieron durante el desarrollo que me parece interesante comentar:
+
+### Generación de páginas y filtrado
+
+Como comenté mi idea era generar la mayor cantidad de páginas de manera estática, esto está buenisimo, pero trae consigo una serie de limitaciones, especialmente cuando intentamos implemntar
+filtros con una buena experiencia de usuario. Mi plan inicial era implementar los filtros mediante query params, de esta manera podría manejar el estado por la URL y la experiencia sería
+mejor al compartir una página con filtros aplicados. El problema viene que al generar la página utilizando `getStaticPaths`, lógicamente no tenemos acceso a esos párametros.
+
+Para no perder los beneficios que otorga la generación estática, mi solución fue contar con dos paths:
+- `/restaurantes/[...provincia]` -> esto se genera de manera estática, utilizando `getStaticPaths`
+- `/buscar` -> esto se renderiza del lado del servidor
+
+Entonces, cuando el usuario aplica un filtro en `/restaurantes/[...provincia]` sólo se lo redirige a, por ejemplo, `/buscar/?provincia=[provincia]&categoria=Vegano`. De esta manera, podemos
+contar con lo mejor de los dos mundos.
+
+Por otro lado, la paginación no necesitó mucho trabajo, gracias a que Astro cuenta con una manera built-in de realizarla. Para aquellos interesados, pueden encontrar más información [acá](https://docs.astro.build/en/guides/routing/#pagination)
+
+### Registro de usuarios
+
+El registro de usuarios tuvo algunas particularidades, porque la mayoría de integraciones que nos permiten resolver este problema fácilmente utilizan servicios externos (como Supabase, Firebase, Clerk, etc) y si bien esto no es
+malo yo quería manejar los usuarios directamente en mi backend. Decidí gestionar la sesión del usuario utilizando un middleware y cookies, el middleware sería el encargado de verificar
+si un usuario está logeado y agregaría la data relevante de ese usuario a la request en caso de estarlo.
+
+Ahora necesitaba encontrar la manera de que un componente pueda ser "actualizado" por el servidor para mostrar el estado del usuario (es decir, si tiene o no la sesión iniciada). No estaba muy seguro como lograr esto, y fue en ese momento, revisando el [discord de Astro](https://astro.build/chat) y su documentación
+donde me encontré con el concepto de [Server Islands](https://astro.build/blog/future-of-astro-server-islands/).
+Lo que nos permite un Server Island es enviar un HTML placeholder mientras que se carga el componente final del lado del servidor, que posteriormente reemplazará ese placeholder. Para realizar un pararelismo, podríamos decir que funciona parecido al `<Suspense>` de React.
+
+Gracias a esta tecnología, puedo cargar un avatar temporal mientras verifico si el usuario está logeado o no, y luego, enviar el HTML correspondiente al cliente dependiendo del resultado de la verificación. 
+
+### SEO
+
+El SEO es una parte importante del proyecto, finalmente es lo que nos va a posicionar en Google. Por esto mismo es que intenté generar la mayor cantidad de páginas de forma estática.
+La optimización de los tiempos de carga es fundamental de cara a tener un buen SEO. Adicionalmente me preocupé por intentar tener los datos estructurados lo más completos posibles. 
+
+Prácticamente todo el contenido relevante de GuiaVegana tiene un Schema por detrás. Los restaurantes, los listados, los breadcrumbs, los FAQs, los artículos, el blog e incluso el mismo sitio posee un [Organization Schema](https://schema.org/Organization)
+en su raíz. 
+
+También preparé un pequeño blog para escribir contenido y que el tráfico también pueda venir desde búsquedas relacionadas a ese contenido (por ejemplo: experiencias en restaurantes o eventos veganos). Lamentablemente no tuve la oportunidad de aprovecharlo
+como se debe, pero es algo que sin duda quiero visitar en un futuro cercano. 
 
 
 ## Desplegando el proyecto
 
-Para llevar el proyecto a producción utilicé dos servicios: [Vercel](https://vercel.com/) (frontend) y [DigitalOcean](https://www.digitalocean.com/) (backend). 
+Para llevar el proyecto a producción utilicé tres servicios: [Vercel](https://vercel.com/) (frontend), [DigitalOcean](https://www.digitalocean.com/) (backend) y [Cloudflare](https://cloudflare.com) (dominios/mailing). 
 
 Desplegar un proyecto en Vercel es bastante directo, solamente linkeamos nuestro Github/Gitlab y seleccionamos el proyecto que queremos. 
 Vercel se encarga del resto siempre y cuando sea una tecnología soportada por la plataforma. En este caso, Astro es perfecto, tiene un adaptador que funciona sin problemas ni configuraciones extremas con Vercel ([@astro/vercel](https://vercel.com/docs/frameworks/astro))
@@ -57,3 +112,38 @@ En cuanto al backend y DigitalOcean, si bien requiere mayor configuración que V
 - [How to Set Up a Node.js Application for Production on Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-20-04)
 - [Levantar un servidor de Node en DigitalOcean con PM2, NGINX, Dominio Personalizado y Certificado SSL](https://tomihq-dev.vercel.app/blog/pm2-nginx-digitalocean-domain-ssl-certificate)
 
+En ellos está prácticamente todo lo necesario para pasar nuestro proyecto a producción.
+
+El dominio lo compré en [nic.ar](https://nic.ar/) que es la entidad encargada de administrar los dominios para el ccTLD .ar. Sin embargo, esta entidad solo nos otorga la "titularidad" del dominio
+pero no es suficiente si queremos configurar los DNS de manera tal que una persona pueda ingresar a él por internet. Este proceso de "delegar" el dominio es breve y si hicimos algo parecido antes no vamos a tener problemas.
+
+<Callout>
+<a style="color: #fff;" href="https://gonzalohirsch.com/blog/delegating-com-ar-domains-using-cloudflare/">Esta guía</a> puede resultarles de ayuda a aquellos que no hayan tenido experiencias previas.
+</Callout>
+
+Por último, configuré el correo `hola@guiavegana.ar` utilizando [Cloudflare Email Routing](https://blog.cloudflare.com/introducing-email-routing/), que si bien no actúa como un proveedor de correos corporativos tradicional (como Google Workspace o Zoho Mail),
+funcionaba perfecto para mi caso. Simplemente quería tener un correo electrónico que permita diferenciar a GuíaVegana de mi correo personal, pero realmente no necesitaba tener una bandeja de entrada adicional. Entonces era suficiente con poder enviar mails a ese dominio y que lleguen a mi bandeja personal.
+
+Algo que no está del todo relacionado con este artículo, pero no deja de ser interesante, es que con el fin de tener una bandeja de entrada más organizada decidí agregar tags a los correos que lleguen a mi bandeja
+de entrada mediante `hola@guiavegana.ar`. Es fácil de hacer y realmente deja mucho más claro el objetivo de cada correo. 
+
+Yo lo hice con Gmail: nos tenemos que dirigir a nuestra bandeja de entrada -> configuración -> filtros y direcciones bloqueadas -> crear filtro. 
+
+![Configuración de Tags](https://res.cloudinary.com/dcb31ckjr/image/upload/v1735994183/guia-vegana/screenshot_xwi39k.png)
+
+Nos va a abrir un pequeño popup donde tenemos que hacer dos modificaciones, primero poner la dirección de nuestro correo de Cloudflare en el campo "Para", luego presionamos "Crear filtro"
+![Configurar filtro para tag](https://res.cloudinary.com/dcb31ckjr/image/upload/v1735994419/guia-vegana/screenshot_1_ppknln.png)
+
+Y por último marcar el campo "Aplicar la etiqueta" junto a la etiqueta que querramos que aparezca en el correo.
+
+![Aplicar etiqueta al filtro creado](https://res.cloudinary.com/dcb31ckjr/image/upload/v1735994436/guia-vegana/screenshot_2_rpcvrp.png)
+
+Con esa configuración, a cada correo que llegue a la dirección que configuramos se le va a asignar una etiqueta automáticamente, lo que nos permite detectar rápidamente el target
+del correo.
+
+## Conclusión
+
+Considero que desarrollar este proyecto me sirvió mucho, tuve la oportunidad de profundizar en áreas que quizá no controlo tanto en mi día a día laboral y, además, la oportunidad
+de trabajar en algo que tenía ganas hace mucho tiempo. Todavía me quedan muchas ideas para implementar en GuíaVegana, pero en este momento no cuento con tanto tiempo para realizarlas.
+
+Sin embargo, mi idea es continuar desarrollando el proyecto y continuar escribiendo sobre él sin importar cuanto tiempo pase entre cada Diario de Desarrollo.

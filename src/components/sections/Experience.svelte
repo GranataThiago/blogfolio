@@ -1,6 +1,5 @@
 <script>
     import { WORK_EXPERIENCE } from "../../utils/about";
-    import PlaceholderImage from '../../assets/heurix.webp'
 
     export let selectedJob = 0;
     export let job = WORK_EXPERIENCE[0];
@@ -27,7 +26,9 @@
         </div>
     </header>
     <div class="h-full p-8 flex items-center gap-8 place-self-center">
-        <img class="grayscale hidden md:block" loading="lazy" src={PlaceholderImage.src} alt={job.company}>
+        {#if job.image}
+            <img class="grayscale hidden md:block" loading="lazy" src={job.image} alt={job.company} />
+        {/if}
         <div>
             <p class="font-bold font-mono text-3xl text-center md:text-left">{job.role}</p>
             <p class="text-center md:text-left">{job.technologies}</p>
